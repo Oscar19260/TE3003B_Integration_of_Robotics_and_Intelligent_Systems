@@ -1,0 +1,22 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/noetic/include/**",
+        "/home/oz26/Documentos/TE3003B/Modulo_3/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/catkin_ws/src/basic_comms/include/**",
+        "/home/oz26/Documentos/TE3003B/Modulo_3/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/catkin_ws/src/puzzlebot_rviz/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

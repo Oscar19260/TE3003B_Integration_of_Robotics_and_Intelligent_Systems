@@ -1,0 +1,8 @@
+prefix=/home/oz26/Documentos/TE3003B/Modulo_3/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/catkin_ws/install
+
+Name: basic_comms
+Description: Description of basic_comms
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

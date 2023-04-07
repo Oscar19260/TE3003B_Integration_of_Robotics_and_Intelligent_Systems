@@ -1,0 +1,2 @@
+puzzlebot_control:puzzlebot_gazebo:puzzlebot_rviz:puzzlebot_sim:puzzlebot_world
+-DCATKIN_DEVEL_PREFIX=/home/oz26/Documentos/TE3003B/Modulo_3/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/oz26/Documentos/TE3003B/Modulo_3/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/catkin_ws/install -G Unix Makefiles
