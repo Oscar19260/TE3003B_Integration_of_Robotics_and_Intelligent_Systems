@@ -5,7 +5,6 @@ import numpy as np
 from time import sleep
 from std_msgs.msg import Float32
 from geometry_msgs.msg import Twist, PoseStamped
-# from tf.transformations import euler_from_quaternion
 
 class Challenge():
     def __init__(self):
@@ -46,7 +45,7 @@ class Challenge():
             if theta > math.pi:
                 theta = theta - 2 * math.pi
             elif theta < -math.pi:
-                theta = theta + 2 *math.pi
+                theta = theta + 2 * math.pi
 
             self.pose.pose.position.x = self.X
             self.pose.pose.position.y = self.Y
@@ -56,19 +55,17 @@ class Challenge():
             et = round(np.arctan2(self.Y - y, self.X - x) - theta, 3)
             ed = round(math.sqrt((self.X - x)**2 + (self.Y - y)**2), 3)
 
-            self.vel.linear.x = 0
-            self.vel.angular.z = 0
+            self.vel = Twist()
                  
             if et >= 0.25 or -0.25 >= et:
-                self.vel.angular.z = kw * et  # w = kw*et
+                self.vel.angular.z = kw * et  # w = kw * et
                 
             elif ed >= 0.25:
-                self.vel.linear.x = kv * ed  # v = kv*ed
+                self.vel.linear.x = kv * ed   # v = kv * ed
                 self.vel.angular.z = 0
 
             self.pub.publish(self.vel)
-            self.vel.linear.x = 0.0
-            self.vel.angular.z = 0.0
+            self.vel = Twist()
             rate.sleep()
 
     def get_pose(self, pose):
