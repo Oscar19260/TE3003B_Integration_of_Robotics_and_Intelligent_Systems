@@ -20,14 +20,13 @@ class Challenge():
         self.pose = PoseStamped()
         self.X, self.Y = 0.0, 0.0
         self.wr, self.wl = 0.0, 0.0
-        
 
         ### *** PUBLISHERS  *** ###
         self.pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
-        self.pub_sim = rospy.Publisher('/pose_sim', PoseStamped, queue_size=10)
+        self.pub_sim = rospy.Publisher('/pose_target', PoseStamped, queue_size=10)
 
         ### *** SUBSCRIBERS *** ###
-        rospy.Subscriber("/pose_target", PoseStamped, self.get_pose)
+        rospy.Subscriber("/pose_sim", PoseStamped, self.get_pose)
         rospy.Subscriber("/wr", Float32, self.get_wr)
         rospy.Subscriber("/wl", Float32, self.get_wl)
 
@@ -69,20 +68,20 @@ class Challenge():
             rate.sleep()
 
     def get_pose(self, pose):
-        # This function receives a the goal from rviz.
+        """ This function receives a the goal from rviz. """
         self.X = pose.pose.position.x
         self.Y = pose.pose.position.y
 
     def get_wr(self, wr):
-        # This function receives a the right wheel speed [rad/s] 
+        """ This function receives a the right wheel speed [rad/s] """
         self.wr = wr.data
 
     def get_wl(self, wl):
-        # This function receives a the left wheel speed [rad/s] 
+        """ This function receives a the left wheel speed [rad/s] """
         self.wl = wl.data
 
     def cleanup(self):
-        # This function reset data to end the node
+        """ This function reset data to end the node """
         self.wr = 0.0
         self.wl = 0.0
         self.vel = Twist()

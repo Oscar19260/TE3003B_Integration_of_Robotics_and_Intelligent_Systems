@@ -29,6 +29,7 @@
 
 <gazebo>
   <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    <publishWheelTF>false</publishWheelTF>
   </plugin>
 </gazebo>
    
@@ -49,6 +50,7 @@
           <far>300</far>
         </clip>
       </camera>
+
       <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
         <alwaysOn>true</alwaysOn>
         <updateRate>0.0</updateRate>

@@ -31,7 +31,7 @@
         <visual name="">
             <origin xyz="0.0 0.0 0.0" rpy="${cdeg} 0.0 ${cdeg}"/>
             <geometry>
-                <mesh filename="package://puzzlebot_sim/meshes/chassis.stl" scale="1 1 1"/>
+                <mesh filename="package://puzzlebot_rviz/meshes/chassis.stl" scale="1 1 1"/>
             </geometry>
             <material name="red">
                 <color rgba="1.0 0.0 0.0 1.0"/>
@@ -42,7 +42,7 @@
         <collision>
             <origin xyz="0.0 0.0 0.0" rpy="${cdeg} 0.0 ${cdeg}"/>
             <geometry>
-                <mesh filename="package://puzzlebot_sim/meshes/chassis.stl" scale="1 1 1"/>
+                <mesh filename="package://puzzlebot_rviz/meshes/chassis.stl" scale="1 1 1"/>
             </geometry>
         </collision>
     </link>
@@ -59,7 +59,7 @@
             <visual>
                 <origin xyz="0.0 0.0 0.0" rpy="0.0 ${cdeg} ${deg}"/>
                 <geometry>
-                     <mesh filename="package://puzzlebot_sim/meshes/wheel_coupler.stl" scale="1 1 1"/>
+                     <mesh filename="package://puzzlebot_rviz/meshes/wheel_coupler.stl" scale="1 1 1"/>
                 </geometry>
                 <material name="blue">
                     <color rgba="0.0 0.0 1.0 1.0"/>
@@ -70,7 +70,7 @@
             <collision>
                 <origin xyz="0.0 0.0 0.0" rpy="0.0 ${cdeg} ${deg}"/>
                 <geometry>
-                    <mesh filename="package://puzzlebot_sim/meshes/wheel_coupler.stl" scale="1 1 1"/>
+                    <mesh filename="package://puzzlebot_rviz/meshes/wheel_coupler.stl" scale="1 1 1"/>
                 </geometry>
             </collision>
         </link>

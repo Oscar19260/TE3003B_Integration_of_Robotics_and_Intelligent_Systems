@@ -5,8 +5,7 @@
 #include <ros/ros.h>
 
 
-int sign(double x)
-{
+int sign(double x){
 	if (x>0)
 		return 1;
 	else if (x<0)
@@ -14,8 +13,8 @@ int sign(double x)
 	else
 		return 0;
 }
-std::map<std::string,std::string> FetchTopics(std::string header,ros::NodeHandle& nh)
-{
+
+std::map<std::string,std::string> FetchTopics(std::string header,ros::NodeHandle& nh){
 	std::map<std::string,std::string> topics;
 	nh.getParam(header+"/topics/",topics);
 	return topics;
@@ -62,7 +61,5 @@ double WrapToPi(double Ang){
 	
 	return result - M_PI;
 }
-
-
 
 #endif

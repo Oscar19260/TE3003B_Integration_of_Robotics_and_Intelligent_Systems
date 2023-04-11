@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-    <param name="robot_description" command="xacro '$(find puzzlebot_sim)/urdf/puzzlebot.urdf.xacro'"/>
+    <param name="robot_description" command="xacro '$(find puzzlebot_rviz)/urdf/puzzlebot.urdf.xacro'"/>
     <arg name="rviz_config_file" default="$(find puzzlebot_rviz)/config/config.rviz"/>
 
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>

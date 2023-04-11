@@ -23,8 +23,8 @@ std_msgs/Float32.h
 -
 control_msgs/JointControllerState.h
 -
-puzzlebot_control/Shared.hpp
-/home/oz26/Documentos/TE3003B/Modulo_3/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/catkin_ws/src/puzzlebot_control/src/puzzlebot_control/Shared.hpp
+../include/puzzlebot_control/Shared.hpp
+/home/oz26/Documentos/TE3003B/Modulo_3/TE3003B_Integration_of_Robotics_and_Intelligent_Systems/catkin_ws/src/puzzlebot_control/include/puzzlebot_control/Shared.hpp
 
 /opt/ros/noetic/include/control_msgs/JointControllerState.h
 string
