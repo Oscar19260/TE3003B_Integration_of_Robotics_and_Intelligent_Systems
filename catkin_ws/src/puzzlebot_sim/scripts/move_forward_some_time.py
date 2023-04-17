@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import math
 import rospy
 from geometry_msgs.msg import Twist
 
@@ -18,15 +19,16 @@ class MoveFClass():
         rospy.loginfo("About to be moving forward!")
         n = 0
         while not rospy.is_shutdown():
-            if n < 50:  # If rate is 10Hz we move 50.0*0.1s = 5s
-                rospy.loginfo("moving forward!")
+            if n < 50:  # If rate is 10Hz we move 50.0 * 0.1s = 5s
+                # rospy.loginfo("moving forward!")
                 # Fill in the message with required data
-                my_twist.linear.x = 0.2  # Our forward speed in [m/s]. (0.2[m/s]*5[s]) = 1[m]
-                my_twist.linear.z = 0    # Our angular speed in [rad/s], (In this case the robot does not rotate)
+                my_twist.linear.x = 0.2  # Our forward speed in [m/s]. (0.2[m/s] * 5[s]) = 1[m]
+                my_twist.angular.z = 0   # Our angular speed in [rad/s], (In this case the robot does not rotate) math.pi/10
             
             else:
-                rospy.loginfo("stop!")
+                # rospy.loginfo("stop!")
                 my_twist.linear.x = 0.0  # Our forward speed in [m/s]
+                my_twist.angular.z = 0.0
                 
             # Send the speed to the robot
             self.cmd_vel_pub.publish(my_twist)

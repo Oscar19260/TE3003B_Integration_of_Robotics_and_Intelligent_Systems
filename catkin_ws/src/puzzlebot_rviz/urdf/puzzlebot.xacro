@@ -9,24 +9,26 @@
     <xacro:property name="height" value="0.29" />
     <xacro:property name="depth" value="0.17" />
 
-    <link name="base_link" />
+    <link name="base_link">
+        <pose>0 0 0 0 0 0</pose>
+    </link>
 
     <joint name="base_joint" type="fixed">
-        <!-- <origin xyz="0.0 0.0 0.05" rpy="0.0 0.0 0.0"/> -->
+        <origin xyz="0.0 0.0 0.05" rpy="0.0 0.0 0.0"/>
         <parent link="base_link"/>
         <child link="chassis"/>
-        <!-- <axis xyz="0.0 0.0 1.0"/> -->
+        <axis xyz="0.0 0.0 1.0"/> 
     </joint>
 
     <!-- ROBOT CHASSIS-->
     <link name="chassis">
-        <inertial>
+        <!-- <inertial>
             <origin xyz="0.0 0.0 0.0" rpy="${cdeg} 0.0 ${cdeg}"/>
             <mass value="1.0"/>
             <inertia ixx="${constant * mass * (height*height + depth*depth) }" ixy="0.0" ixz="0.0" 
                      iyy="${constant * mass * (width*width + height*height) }" iyz="0.0" 
                      izz="${constant * mass * (width*width + depth*depth) }"/>
-        </inertial>
+        </inertial> -->
 
         <visual name="">
             <origin xyz="0.0 0.0 0.0" rpy="${cdeg} 0.0 ${cdeg}"/>
@@ -39,22 +41,22 @@
             </material>
         </visual>
 
-        <collision>
+        <!-- <collision>
             <origin xyz="0.0 0.0 0.0" rpy="${cdeg} 0.0 ${cdeg}"/>
             <geometry>
                 <mesh filename="package://puzzlebot_rviz/meshes/chassis.stl" scale="1 1 1"/>
             </geometry>
-        </collision>
+        </collision> -->
     </link>
 
     <!-- ROBOT WHEELS -->
     <xacro:macro name="wheel" params="name x y deg">
         <link name="wheel_${name}_link">
-            <inertial>
+            <!-- <inertial>
                 <mass value="0.5"/>
                 <origin xyz="0.0 0.0 0.0" rpy="0.0 ${cdeg} ${deg}"/>
                 <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
-            </inertial>
+            </inertial> -->
 
             <visual>
                 <origin xyz="0.0 0.0 0.0" rpy="0.0 ${cdeg} ${deg}"/>

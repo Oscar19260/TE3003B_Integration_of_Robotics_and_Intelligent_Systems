@@ -21,8 +21,8 @@
     <!--load robot description -->
     <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find puzzlebot_gazebo)/urdf/puzzlebot.xacro'" />
     
-    <arg name="x" default="-0.8"/>
-    <arg name="y" default="-0.8"/>
+    <arg name="x" default="0.0"/>
+    <arg name="y" default="0.0"/>
     <arg name="z" default="0.0"/>
     
     <node name="puzzlebot_spawn" pkg="gazebo_ros" type="spawn_model"  output="screen"
@@ -35,7 +35,7 @@
     <node name="puzzlebot_odom" pkg="puzzlebot_gazebo" type="tf_map.py"/>
     <include file="$(find puzzlebot_control)/launch/puzzlebot_control.launch"/>
     
-    <!-- node name = "rviz" pkg="rviz" type = "rviz" args = "-d $(find puzzlebot_gazebo)/config_files/robot_example.rviz" required = "true" -->
-    <node name="move_forward_some_time" pkg="puzzlebot_sim" type="move_forward_some_time.py" output="screen"/></launch>
+    <!-- <node name="move_forward_some_time" pkg="puzzlebot_sim" type="move_forward_some_time.py" output="screen"/> -->
+</launch>
 
   

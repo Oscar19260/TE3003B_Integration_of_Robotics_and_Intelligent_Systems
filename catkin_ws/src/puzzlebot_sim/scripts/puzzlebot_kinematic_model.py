@@ -11,14 +11,13 @@ from tf.transformations import quaternion_from_euler
 
 """
 This class will do the following: 
-   subscribe to the /cmd_vel topic  
+   subscribe to the /cmd_vel topic  base_link
    publish the simulated pose of the robot to /pose_sim topic  
    publish to /wr and /wl the simulated wheel speed.
 """
 
-class PuzzlebotKinClass():  
+class PuzzlebotKinClass():
     def __init__(self):  
-        rospy.on_shutdown(self.cleanup)
         ###******* INIT PUBLISHERS *******###  
         # Create the subscriber to cmd_vel topic 
         rospy.Subscriber("cmd_vel", Twist, self.cmd_vel_cb) 
@@ -94,7 +93,7 @@ class PuzzlebotKinClass():
         x = self.x_ant + (v * math.cos(w) * self.delta_t)
         y = self.y_ant + (v * math.sin(w) * self.delta_t)
         theta = self.theta_ant + (w * self.delta_t)
-        self.x_ant, self.y_ant = x, y
+        self.x_ant, self.y_ant, self.theta_ant = x, y, theta
         return [x, y, theta] 
     
     def fill_marker(self, pose_stamped=PoseStamped()): 
@@ -126,12 +125,6 @@ class PuzzlebotKinClass():
         marker.pose.orientation.z = pose_stamped.pose.orientation.z 
         marker.pose.orientation.w = pose_stamped.pose.orientation.w 
         return marker 
-    
-    def cleanup(self):
-        """ This function reset data to end the node """
-        self.wr = 0.0
-        self.wl = 0.0
-        print("That's all, bye 🦀")
 
 
 ############################### MAIN PROGRAM #################################### 
