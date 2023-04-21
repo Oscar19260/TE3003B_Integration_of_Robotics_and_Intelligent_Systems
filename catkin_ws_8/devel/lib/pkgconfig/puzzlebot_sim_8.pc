@@ -1,0 +1,8 @@
+prefix=/home/dassdinho/catkin_ws_8/devel
+
+Name: puzzlebot_sim_8
+Description: Description of puzzlebot_sim_8
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
