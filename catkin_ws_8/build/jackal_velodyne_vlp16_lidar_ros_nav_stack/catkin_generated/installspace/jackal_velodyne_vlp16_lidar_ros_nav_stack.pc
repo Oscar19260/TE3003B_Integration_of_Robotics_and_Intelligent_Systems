@@ -1,0 +1,8 @@
+prefix=/home/dassdinho/catkin_ws_8/install
+
+Name: jackal_velodyne_vlp16_lidar_ros_nav_stack
+Description: Description of jackal_velodyne_vlp16_lidar_ros_nav_stack
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
