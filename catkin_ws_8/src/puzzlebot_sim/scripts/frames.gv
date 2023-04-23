@@ -1,0 +1,15 @@
+digraph G {
+"base_link" -> "chassis"[label="Broadcaster: /robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 14.681 sec old)\nBuffer length: 0.000 sec\n"];
+"odom" -> "base_link"[label="Broadcaster: /puzzlebot_odom\nAverage rate: 1000.203 Hz\nMost recent transform: 14.680 ( 0.001 sec old)\nBuffer length: 4.924 sec\n"];
+"chassis" -> "camera"[label="Broadcaster: /robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 14.681 sec old)\nBuffer length: 0.000 sec\n"];
+"chassis" -> "left_wheel"[label="Broadcaster: /robot_state_publisher\nAverage rate: 50.204 Hz\nMost recent transform: 14.665 ( 0.016 sec old)\nBuffer length: 4.900 sec\n"];
+"chassis" -> "right_wheel"[label="Broadcaster: /robot_state_publisher\nAverage rate: 50.204 Hz\nMost recent transform: 14.665 ( 0.016 sec old)\nBuffer length: 4.900 sec\n"];
+"odom" -> "base_link_rviz"[label="Broadcaster: /localisation\nAverage rate: 50.204 Hz\nMost recent transform: 14.674 ( 0.007 sec old)\nBuffer length: 4.900 sec\n"];
+"base_link_rviz" -> "chassis_rviz"[label="Broadcaster: /localisation\nAverage rate: 50.194 Hz\nMost recent transform: 14.675 ( 0.006 sec old)\nBuffer length: 4.901 sec\n"];
+"base_link_rviz" -> "right_wheel_rviz"[label="Broadcaster: /localisation\nAverage rate: 50.194 Hz\nMost recent transform: 14.675 ( 0.006 sec old)\nBuffer length: 4.901 sec\n"];
+"base_link_rviz" -> "left_wheel_rviz"[label="Broadcaster: /localisation\nAverage rate: 50.194 Hz\nMost recent transform: 14.675 ( 0.006 sec old)\nBuffer length: 4.901 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 14.681"[ shape=plaintext ] ;
+ }->"odom";
+}

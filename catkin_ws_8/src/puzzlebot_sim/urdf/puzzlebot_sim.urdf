@@ -4,7 +4,7 @@
 
     <!-- Dummy link to fix robot chassis --> 
 
-    <link name="base_link"> 
+    <link name="base_link_rviz"> 
 
         <pose>0 0 0 0 0 0</pose> 
 
@@ -14,15 +14,15 @@
 
     <joint name="base_link_to_chassis" type="fixed"> 
 
-        <parent link="base_link"/> 
+        <parent link="base_link_rviz"/> 
 
-        <child link="chassis"/> 
+        <child link="chassis_rviz"/> 
 
     </joint> 
 
  
 
-    <link name="chassis"> 
+    <link name="chassis_rviz"> 
 
         <visual> 
 
@@ -50,9 +50,9 @@
 
     <joint name="base_to_right_w" type="continuous"> 
 
-        <parent link="base_link" /> 
+        <parent link="base_link_rviz" /> 
 
-        <child link="right_wheel" /> 
+        <child link="right_wheel_rviz" /> 
 
         <origin xyz="0.05 -0.09 0.0" /> 
 
@@ -64,9 +64,9 @@
 
     <joint name="base_to_left_w" type="continuous"> 
 
-        <parent link="base_link" /> 
+        <parent link="base_link_rviz" /> 
 
-        <child link="left_wheel" /> 
+        <child link="left_wheel_rviz" /> 
 
         <origin xyz="0.05 0.09 0" /> 
 
@@ -80,7 +80,7 @@
 
     <!--RIGHT WHEEL --> 
 
-    <link name="right_wheel"> 
+    <link name="right_wheel_rviz"> 
 
         <visual> 
 
@@ -104,7 +104,7 @@
 
     <!--LEFT WHEEL --> 
 
-    <link name="left_wheel"> 
+    <link name="left_wheel_rviz"> 
 
         <visual> 
 

@@ -3,7 +3,7 @@
 <launch>
 
     <arg name="model" default="$(find puzzlebot_sim)/urdf/puzzlebot_sim.urdf"/>
-    <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
+    <param name="robot_description_rviz" command="$(find xacro)/xacro $(arg model)"/>
     
     <node type="rviz" name="rviz" pkg="rviz" args="-d $(find puzzlebot_sim)/rviz/m2_config.rviz"/>
     <!--node name="rviz" pkg="rviz" type="rviz" -->
