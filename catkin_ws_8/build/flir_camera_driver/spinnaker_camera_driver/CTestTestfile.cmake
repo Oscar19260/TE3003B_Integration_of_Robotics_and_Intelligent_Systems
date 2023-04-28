@@ -1,8 +1,0 @@
-# CMake generated Testfile for 
-# Source directory: /home/dassdinho/catkin_ws_8/src/flir_camera_driver/spinnaker_camera_driver
-# Build directory: /home/dassdinho/catkin_ws_8/build/flir_camera_driver/spinnaker_camera_driver
-# 
-# This file includes the relevant testing commands required for 
-# testing this directory and lists subdirectories to be tested as well.
-add_test(_ctest_spinnaker_camera_driver_roslaunch-check_launch_camera.launch "/home/dassdinho/catkin_ws_8/build/catkin_generated/env_cached.sh" "/usr/bin/python2" "/opt/ros/melodic/share/catkin/cmake/test/run_tests.py" "/home/dassdinho/catkin_ws_8/build/test_results/spinnaker_camera_driver/roslaunch-check_launch_camera.launch.xml" "--return-code" "/usr/bin/cmake -E make_directory /home/dassdinho/catkin_ws_8/build/test_results/spinnaker_camera_driver" "/opt/ros/melodic/share/roslaunch/cmake/../scripts/roslaunch-check -o \"/home/dassdinho/catkin_ws_8/build/test_results/spinnaker_camera_driver/roslaunch-check_launch_camera.launch.xml\" \"/home/dassdinho/catkin_ws_8/src/flir_camera_driver/spinnaker_camera_driver/launch/camera.launch\" ")
-add_test(_ctest_spinnaker_camera_driver_roslint_package "/home/dassdinho/catkin_ws_8/build/catkin_generated/env_cached.sh" "/usr/bin/python2" "/opt/ros/melodic/share/catkin/cmake/test/run_tests.py" "/home/dassdinho/catkin_ws_8/build/test_results/spinnaker_camera_driver/roslint-spinnaker_camera_driver.xml" "--working-dir" "/home/dassdinho/catkin_ws_8/build/flir_camera_driver/spinnaker_camera_driver" "--return-code" "/opt/ros/melodic/share/roslint/cmake/../../../lib/roslint/test_wrapper /home/dassdinho/catkin_ws_8/build/test_results/spinnaker_camera_driver/roslint-spinnaker_camera_driver.xml make roslint_spinnaker_camera_driver")

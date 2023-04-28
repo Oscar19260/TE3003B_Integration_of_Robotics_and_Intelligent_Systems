@@ -5,6 +5,14 @@
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
 subdirs("gtest")
-subdirs("flir_camera_driver/flir_camera_description")
-subdirs("flir_camera_driver/flir_camera_driver")
-subdirs("flir_camera_driver/spinnaker_camera_driver")
+subdirs("turtlebot3_simulations/turtlebot3_simulations")
+subdirs("beginner_tutorials")
+subdirs("puzzlebot_rviz_8")
+subdirs("puzzlebot_sim_8")
+subdirs("puzzlebot_world")
+subdirs("puzzlebot_gazebo")
+subdirs("rplidar_ros")
+subdirs("puzzlebot_control")
+subdirs("turtlebot3_simulations/turtlebot3_fake")
+subdirs("turtlebot3_simulations/turtlebot3_gazebo")
+subdirs("puzzlebot_sim")

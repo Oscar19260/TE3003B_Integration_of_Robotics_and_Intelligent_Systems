@@ -127,7 +127,7 @@ CATKIN_SKIP_TESTING:BOOL=OFF
 CATKIN_SYMLINK_INSTALL:BOOL=OFF
 
 //List of ';' separated packages to build
-CATKIN_WHITELIST_PACKAGES:STRING=flir_camera_description;flir_camera_driver;spinnaker_camera_driver
+CATKIN_WHITELIST_PACKAGES:STRING=
 
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/ar
@@ -305,12 +305,6 @@ CURL_INCLUDE_DIR:PATH=/usr/include/x86_64-linux-gnu
 //Path to a library.
 CURL_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libcurl.so
 
-//Dependencies for the target
-Camera_LIB_DEPENDS:STATIC=general;/opt/ros/melodic/lib/libcamera_info_manager.so;general;/opt/ros/melodic/lib/libcamera_calibration_parsers.so;general;/opt/ros/melodic/lib/libdiagnostic_updater.so;general;/opt/ros/melodic/lib/libdynamic_reconfigure_config_init_mutex.so;general;/opt/ros/melodic/lib/libimage_transport.so;general;/opt/ros/melodic/lib/libmessage_filters.so;general;/opt/ros/melodic/lib/libnodeletlib.so;general;/opt/ros/melodic/lib/libbondcpp.so;general;/usr/lib/x86_64-linux-gnu/libuuid.so;general;/opt/ros/melodic/lib/libclass_loader.so;general;/usr/lib/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/melodic/lib/libroslib.so;general;/opt/ros/melodic/lib/librospack.so;general;/usr/lib/x86_64-linux-gnu/libpython2.7.so;general;/usr/lib/x86_64-linux-gnu/libboost_program_options.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml2.so;general;/opt/ros/melodic/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;general;/opt/ros/melodic/lib/librosconsole.so;general;/opt/ros/melodic/lib/librosconsole_log4cxx.so;general;/opt/ros/melodic/lib/librosconsole_backend_interface.so;general;/usr/lib/x86_64-linux-gnu/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so;general;/opt/ros/melodic/lib/libxmlrpcpp.so;general;/opt/ros/melodic/lib/libroscpp_serialization.so;general;/opt/ros/melodic/lib/librostime.so;general;/opt/ros/melodic/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so;general;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;general;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4;
-
-//Dependencies for the target
-Cm3_LIB_DEPENDS:STATIC=general;Camera;general;/opt/ros/melodic/lib/libcamera_info_manager.so;general;/opt/ros/melodic/lib/libcamera_calibration_parsers.so;general;/opt/ros/melodic/lib/libdiagnostic_updater.so;general;/opt/ros/melodic/lib/libdynamic_reconfigure_config_init_mutex.so;general;/opt/ros/melodic/lib/libimage_transport.so;general;/opt/ros/melodic/lib/libmessage_filters.so;general;/opt/ros/melodic/lib/libnodeletlib.so;general;/opt/ros/melodic/lib/libbondcpp.so;general;/usr/lib/x86_64-linux-gnu/libuuid.so;general;/opt/ros/melodic/lib/libclass_loader.so;general;/usr/lib/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/melodic/lib/libroslib.so;general;/opt/ros/melodic/lib/librospack.so;general;/usr/lib/x86_64-linux-gnu/libpython2.7.so;general;/usr/lib/x86_64-linux-gnu/libboost_program_options.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml2.so;general;/opt/ros/melodic/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;general;/opt/ros/melodic/lib/librosconsole.so;general;/opt/ros/melodic/lib/librosconsole_log4cxx.so;general;/opt/ros/melodic/lib/librosconsole_backend_interface.so;general;/usr/lib/x86_64-linux-gnu/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so;general;/opt/ros/melodic/lib/libxmlrpcpp.so;general;/opt/ros/melodic/lib/libroscpp_serialization.so;general;/opt/ros/melodic/lib/librostime.so;general;/opt/ros/melodic/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so;general;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;general;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4;
-
 //Path to a file.
 DL_INCLUDE_DIRS:PATH=/usr/include
 
@@ -319,9 +313,6 @@ DL_LIBRARIES:FILEPATH=/usr/lib/x86_64-linux-gnu/libdl.so
 
 //Path to a program.
 DOXYGEN_EXECUTABLE:FILEPATH=DOXYGEN_EXECUTABLE-NOTFOUND
-
-//Dependencies for the target
-Diagnostics_LIB_DEPENDS:STATIC=general;Camera;general;SpinnakerCameraLib;general;/opt/ros/melodic/lib/libcamera_info_manager.so;general;/opt/ros/melodic/lib/libcamera_calibration_parsers.so;general;/opt/ros/melodic/lib/libdiagnostic_updater.so;general;/opt/ros/melodic/lib/libdynamic_reconfigure_config_init_mutex.so;general;/opt/ros/melodic/lib/libimage_transport.so;general;/opt/ros/melodic/lib/libmessage_filters.so;general;/opt/ros/melodic/lib/libnodeletlib.so;general;/opt/ros/melodic/lib/libbondcpp.so;general;/usr/lib/x86_64-linux-gnu/libuuid.so;general;/opt/ros/melodic/lib/libclass_loader.so;general;/usr/lib/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/melodic/lib/libroslib.so;general;/opt/ros/melodic/lib/librospack.so;general;/usr/lib/x86_64-linux-gnu/libpython2.7.so;general;/usr/lib/x86_64-linux-gnu/libboost_program_options.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml2.so;general;/opt/ros/melodic/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;general;/opt/ros/melodic/lib/librosconsole.so;general;/opt/ros/melodic/lib/librosconsole_log4cxx.so;general;/opt/ros/melodic/lib/librosconsole_backend_interface.so;general;/usr/lib/x86_64-linux-gnu/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so;general;/opt/ros/melodic/lib/libxmlrpcpp.so;general;/opt/ros/melodic/lib/libroscpp_serialization.so;general;/opt/ros/melodic/lib/librostime.so;general;/opt/ros/melodic/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so;general;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;general;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4;
 
 //Path to a program.
 EMPY_EXECUTABLE:FILEPATH=/usr/bin/empy
@@ -367,9 +358,6 @@ GTS_LIBRARY_gts:FILEPATH=/usr/lib/x86_64-linux-gnu/libgts.so
 
 //Path to a library.
 GTS_LIBRARY_m:FILEPATH=/usr/lib/x86_64-linux-gnu/libm.so
-
-//Dependencies for the target
-Gh3_LIB_DEPENDS:STATIC=general;Camera;general;/opt/ros/melodic/lib/libcamera_info_manager.so;general;/opt/ros/melodic/lib/libcamera_calibration_parsers.so;general;/opt/ros/melodic/lib/libdiagnostic_updater.so;general;/opt/ros/melodic/lib/libdynamic_reconfigure_config_init_mutex.so;general;/opt/ros/melodic/lib/libimage_transport.so;general;/opt/ros/melodic/lib/libmessage_filters.so;general;/opt/ros/melodic/lib/libnodeletlib.so;general;/opt/ros/melodic/lib/libbondcpp.so;general;/usr/lib/x86_64-linux-gnu/libuuid.so;general;/opt/ros/melodic/lib/libclass_loader.so;general;/usr/lib/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/melodic/lib/libroslib.so;general;/opt/ros/melodic/lib/librospack.so;general;/usr/lib/x86_64-linux-gnu/libpython2.7.so;general;/usr/lib/x86_64-linux-gnu/libboost_program_options.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml2.so;general;/opt/ros/melodic/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;general;/opt/ros/melodic/lib/librosconsole.so;general;/opt/ros/melodic/lib/librosconsole_log4cxx.so;general;/opt/ros/melodic/lib/librosconsole_backend_interface.so;general;/usr/lib/x86_64-linux-gnu/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so;general;/opt/ros/melodic/lib/libxmlrpcpp.so;general;/opt/ros/melodic/lib/libroscpp_serialization.so;general;/opt/ros/melodic/lib/librostime.so;general;/opt/ros/melodic/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so;general;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;general;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4;
 
 //Path to a library.
 JSONCPP_LIBRARY_jsoncpp:FILEPATH=/usr/lib/x86_64-linux-gnu/libjsoncpp.so
@@ -686,18 +674,6 @@ Simbody_LIBRARIES:STRING=/usr/lib/x86_64-linux-gnu/libSimTKsimbody.so;/usr/lib/x
 //Simbody static libraries
 Simbody_STATIC_LIBRARIES:STRING=Simbody_STATIC_LIBRARIES-NOTFOUND
 
-//Dependencies for the target
-SpinnakerCameraLib_LIB_DEPENDS:STATIC=general;Camera;general;/home/dassdinho/catkin_ws_8/build/usr/lib/libSpinnaker.so;general;/opt/ros/melodic/lib/libcamera_info_manager.so;general;/opt/ros/melodic/lib/libcamera_calibration_parsers.so;general;/opt/ros/melodic/lib/libdiagnostic_updater.so;general;/opt/ros/melodic/lib/libdynamic_reconfigure_config_init_mutex.so;general;/opt/ros/melodic/lib/libimage_transport.so;general;/opt/ros/melodic/lib/libmessage_filters.so;general;/opt/ros/melodic/lib/libnodeletlib.so;general;/opt/ros/melodic/lib/libbondcpp.so;general;/usr/lib/x86_64-linux-gnu/libuuid.so;general;/opt/ros/melodic/lib/libclass_loader.so;general;/usr/lib/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/melodic/lib/libroslib.so;general;/opt/ros/melodic/lib/librospack.so;general;/usr/lib/x86_64-linux-gnu/libpython2.7.so;general;/usr/lib/x86_64-linux-gnu/libboost_program_options.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml2.so;general;/opt/ros/melodic/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;general;/opt/ros/melodic/lib/librosconsole.so;general;/opt/ros/melodic/lib/librosconsole_log4cxx.so;general;/opt/ros/melodic/lib/librosconsole_backend_interface.so;general;/usr/lib/x86_64-linux-gnu/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so;general;/opt/ros/melodic/lib/libxmlrpcpp.so;general;/opt/ros/melodic/lib/libroscpp_serialization.so;general;/opt/ros/melodic/lib/librostime.so;general;/opt/ros/melodic/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so;general;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;general;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4;
-
-//Dependencies for the target
-SpinnakerCameraNodelet_LIB_DEPENDS:STATIC=general;Diagnostics;general;SpinnakerCameraLib;general;Camera;general;Gh3;general;Cm3;general;/opt/ros/melodic/lib/libcamera_info_manager.so;general;/opt/ros/melodic/lib/libcamera_calibration_parsers.so;general;/opt/ros/melodic/lib/libdiagnostic_updater.so;general;/opt/ros/melodic/lib/libdynamic_reconfigure_config_init_mutex.so;general;/opt/ros/melodic/lib/libimage_transport.so;general;/opt/ros/melodic/lib/libmessage_filters.so;general;/opt/ros/melodic/lib/libnodeletlib.so;general;/opt/ros/melodic/lib/libbondcpp.so;general;/usr/lib/x86_64-linux-gnu/libuuid.so;general;/opt/ros/melodic/lib/libclass_loader.so;general;/usr/lib/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/melodic/lib/libroslib.so;general;/opt/ros/melodic/lib/librospack.so;general;/usr/lib/x86_64-linux-gnu/libpython2.7.so;general;/usr/lib/x86_64-linux-gnu/libboost_program_options.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml2.so;general;/opt/ros/melodic/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;general;/opt/ros/melodic/lib/librosconsole.so;general;/opt/ros/melodic/lib/librosconsole_log4cxx.so;general;/opt/ros/melodic/lib/librosconsole_backend_interface.so;general;/usr/lib/x86_64-linux-gnu/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so;general;/opt/ros/melodic/lib/libxmlrpcpp.so;general;/opt/ros/melodic/lib/libroscpp_serialization.so;general;/opt/ros/melodic/lib/librostime.so;general;/opt/ros/melodic/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so;general;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;general;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4;
-
-//Path to a file.
-Spinnaker_INCLUDE_DIRS:PATH=Spinnaker_INCLUDE_DIRS-NOTFOUND
-
-//Path to a library.
-Spinnaker_LIBRARIES:FILEPATH=Spinnaker_LIBRARIES-NOTFOUND
-
 //Path to a library.
 TINYXML2_LIBRARY_tinyxml2:FILEPATH=/usr/lib/x86_64-linux-gnu/libtinyxml2.so
 
@@ -749,18 +725,6 @@ beginner_tutorials_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/beginner_
 //Value Computed by CMake
 beginner_tutorials_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/beginner_tutorials
 
-//The directory containing a CMake configuration file for bond.
-bond_DIR:PATH=/opt/ros/melodic/share/bond/cmake
-
-//The directory containing a CMake configuration file for bondcpp.
-bondcpp_DIR:PATH=/opt/ros/melodic/share/bondcpp/cmake
-
-//The directory containing a CMake configuration file for camera_calibration_parsers.
-camera_calibration_parsers_DIR:PATH=/opt/ros/melodic/share/camera_calibration_parsers/cmake
-
-//The directory containing a CMake configuration file for camera_info_manager.
-camera_info_manager_DIR:PATH=/opt/ros/melodic/share/camera_info_manager/cmake
-
 //The directory containing a CMake configuration file for catkin.
 catkin_DIR:PATH=/opt/ros/melodic/share/catkin/cmake
 
@@ -770,26 +734,8 @@ class_loader_DIR:PATH=/opt/ros/melodic/share/class_loader/cmake
 //The directory containing a CMake configuration file for cpp_common.
 cpp_common_DIR:PATH=/opt/ros/melodic/share/cpp_common/cmake
 
-//The directory containing a CMake configuration file for diagnostic_msgs.
-diagnostic_msgs_DIR:PATH=/opt/ros/melodic/share/diagnostic_msgs/cmake
-
-//The directory containing a CMake configuration file for diagnostic_updater.
-diagnostic_updater_DIR:PATH=/opt/ros/melodic/share/diagnostic_updater/cmake
-
 //The directory containing a CMake configuration file for dynamic_reconfigure.
 dynamic_reconfigure_DIR:PATH=/opt/ros/melodic/share/dynamic_reconfigure/cmake
-
-//Value Computed by CMake
-flir_camera_description_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/flir_camera_driver/flir_camera_description
-
-//Value Computed by CMake
-flir_camera_description_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/flir_camera_driver/flir_camera_description
-
-//Value Computed by CMake
-flir_camera_driver_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/flir_camera_driver/flir_camera_driver
-
-//Value Computed by CMake
-flir_camera_driver_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/flir_camera_driver/flir_camera_driver
 
 //The directory containing a CMake configuration file for gazebo.
 gazebo_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/gazebo
@@ -799,6 +745,9 @@ gazebo_msgs_DIR:PATH=/opt/ros/melodic/share/gazebo_msgs/cmake
 
 //Path to a library.
 gazebo_proto_msgs_lib:FILEPATH=/usr/lib/x86_64-linux-gnu/libgazebo_msgs.so
+
+//The directory containing a CMake configuration file for gazebo_ros.
+gazebo_ros_DIR:PATH=/opt/ros/melodic/share/gazebo_ros/cmake
 
 //The directory containing a CMake configuration file for gencpp.
 gencpp_DIR:PATH=/opt/ros/melodic/share/gencpp/cmake
@@ -888,53 +837,11 @@ ignition-msgs1_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/ignition-msgs1
 //The directory containing a CMake configuration file for ignition-transport4.
 ignition-transport4_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/ignition-transport4
 
-//The directory containing a CMake configuration file for image_exposure_msgs.
-image_exposure_msgs_DIR:PATH=/opt/ros/melodic/share/image_exposure_msgs/cmake
-
-//The directory containing a CMake configuration file for image_transport.
-image_transport_DIR:PATH=/opt/ros/melodic/share/image_transport/cmake
-
-//Value Computed by CMake
-jackal_control_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/jackal/jackal_control
-
-//Value Computed by CMake
-jackal_control_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/jackal/jackal_control
-
-//Value Computed by CMake
-jackal_description_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/jackal/jackal_description
-
-//Value Computed by CMake
-jackal_description_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/jackal/jackal_description
-
-//Value Computed by CMake
-jackal_msgs_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/jackal/jackal_msgs
-
-//Value Computed by CMake
-jackal_msgs_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/jackal/jackal_msgs
-
-//Value Computed by CMake
-jackal_navigation_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/jackal/jackal_navigation
-
-//Value Computed by CMake
-jackal_navigation_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/jackal/jackal_navigation
-
-//Value Computed by CMake
-jackal_tutorials_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/jackal/jackal_tutorials
-
-//Value Computed by CMake
-jackal_tutorials_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/jackal/jackal_tutorials
-
-//Value Computed by CMake
-jackal_velodyne_vlp16_lidar_ros_nav_stack_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/jackal_velodyne_vlp16_lidar_ros_nav_stack
-
-//Value Computed by CMake
-jackal_velodyne_vlp16_lidar_ros_nav_stack_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/jackal_velodyne_vlp16_lidar_ros_nav_stack
-
 //The directory containing a CMake configuration file for jsoncpp.
 jsoncpp_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/jsoncpp
 
 //Path to a library.
-lib:FILEPATH=/opt/ros/melodic/lib/libbondcpp.so
+lib:FILEPATH=/opt/ros/melodic/lib/librosconsole_bridge.so
 
 //The directory containing a CMake configuration file for message_filters.
 message_filters_DIR:PATH=/opt/ros/melodic/share/message_filters/cmake
@@ -948,23 +855,8 @@ message_runtime_DIR:PATH=/opt/ros/melodic/share/message_runtime/cmake
 //The directory containing a CMake configuration file for nav_msgs.
 nav_msgs_DIR:PATH=/opt/ros/melodic/share/nav_msgs/cmake
 
-//The directory containing a CMake configuration file for nodelet.
-nodelet_DIR:PATH=/opt/ros/melodic/share/nodelet/cmake
-
-//The directory containing a CMake configuration file for nodelet_topic_tools.
-nodelet_topic_tools_DIR:PATH=/opt/ros/melodic/share/nodelet_topic_tools/cmake
-
 //Path to a library.
 onelib:FILEPATH=/usr/lib/x86_64-linux-gnu/libsdformat.so
-
-//The directory containing a CMake configuration file for pcl_conversions.
-pcl_conversions_DIR:PATH=/opt/ros/melodic/share/pcl_conversions/cmake
-
-//The directory containing a CMake configuration file for pcl_msgs.
-pcl_msgs_DIR:PATH=/opt/ros/melodic/share/pcl_msgs/cmake
-
-//The directory containing a CMake configuration file for pcl_ros.
-pcl_ros_DIR:PATH=/opt/ros/melodic/share/pcl_ros/cmake
 
 //The directory containing a CMake configuration file for pluginlib.
 pluginlib_DIR:PATH=/opt/ros/melodic/share/pluginlib/cmake
@@ -988,12 +880,6 @@ puzzlebot_rviz_8_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/puzzlebot_r
 puzzlebot_rviz_8_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/puzzlebot_rviz_8
 
 //Value Computed by CMake
-puzzlebot_rviz_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/puzzlebot_rviz_8
-
-//Value Computed by CMake
-puzzlebot_rviz_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/puzzlebot_rviz_8
-
-//Value Computed by CMake
 puzzlebot_sim_8_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/puzzlebot_sim_8
 
 //Value Computed by CMake
@@ -1010,12 +896,6 @@ puzzlebot_world_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/puzzlebot_wo
 
 //Value Computed by CMake
 puzzlebot_world_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/puzzlebot_world
-
-//The directory containing a CMake configuration file for rosbag.
-rosbag_DIR:PATH=/opt/ros/melodic/share/rosbag/cmake
-
-//The directory containing a CMake configuration file for rosbag_storage.
-rosbag_storage_DIR:PATH=/opt/ros/melodic/share/rosbag_storage/cmake
 
 //The directory containing a CMake configuration file for rosconsole.
 rosconsole_DIR:PATH=/opt/ros/melodic/share/rosconsole/cmake
@@ -1044,12 +924,6 @@ roslaunch_DIR:PATH=/opt/ros/melodic/share/roslaunch/cmake
 //The directory containing a CMake configuration file for roslib.
 roslib_DIR:PATH=/opt/ros/melodic/share/roslib/cmake
 
-//The directory containing a CMake configuration file for roslint.
-roslint_DIR:PATH=/opt/ros/melodic/share/roslint/cmake
-
-//The directory containing a CMake configuration file for roslz4.
-roslz4_DIR:PATH=/opt/ros/melodic/share/roslz4/cmake
-
 //The directory containing a CMake configuration file for rospack.
 rospack_DIR:PATH=/opt/ros/melodic/share/rospack/cmake
 
@@ -1068,18 +942,6 @@ rplidar_ros_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/rplidar_ros
 //The directory containing a CMake configuration file for sensor_msgs.
 sensor_msgs_DIR:PATH=/opt/ros/melodic/share/sensor_msgs/cmake
 
-//The directory containing a CMake configuration file for smclib.
-smclib_DIR:PATH=/opt/ros/melodic/share/smclib/cmake
-
-//Value Computed by CMake
-spinnaker_camera_driver_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/flir_camera_driver/spinnaker_camera_driver
-
-//Value Computed by CMake
-spinnaker_camera_driver_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/flir_camera_driver/spinnaker_camera_driver
-
-//The directory containing a CMake configuration file for statistics_msgs.
-statistics_msgs_DIR:PATH=/opt/ros/melodic/share/statistics_msgs/cmake
-
 //The directory containing a CMake configuration file for std_msgs.
 std_msgs_DIR:PATH=/opt/ros/melodic/share/std_msgs/cmake
 
@@ -1088,9 +950,6 @@ std_srvs_DIR:PATH=/opt/ros/melodic/share/std_srvs/cmake
 
 //The directory containing a CMake configuration file for tf2.
 tf2_DIR:PATH=/opt/ros/melodic/share/tf2/cmake
-
-//The directory containing a CMake configuration file for tf2_eigen.
-tf2_eigen_DIR:PATH=/opt/ros/melodic/share/tf2_eigen/cmake
 
 //The directory containing a CMake configuration file for tf2_msgs.
 tf2_msgs_DIR:PATH=/opt/ros/melodic/share/tf2_msgs/cmake
@@ -1104,17 +963,32 @@ tf2_ros_DIR:PATH=/opt/ros/melodic/share/tf2_ros/cmake
 //The directory containing a CMake configuration file for tf.
 tf_DIR:PATH=/opt/ros/melodic/share/tf/cmake
 
-//The directory containing a CMake configuration file for topic_tools.
-topic_tools_DIR:PATH=/opt/ros/melodic/share/topic_tools/cmake
-
 //The directory containing a CMake configuration file for trajectory_msgs.
 trajectory_msgs_DIR:PATH=/opt/ros/melodic/share/trajectory_msgs/cmake
 
+//Value Computed by CMake
+turtlebot3_fake_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/turtlebot3_simulations/turtlebot3_fake
+
+//Value Computed by CMake
+turtlebot3_fake_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/turtlebot3_simulations/turtlebot3_fake
+
+//Value Computed by CMake
+turtlebot3_gazebo_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/turtlebot3_simulations/turtlebot3_gazebo
+
+//Value Computed by CMake
+turtlebot3_gazebo_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/turtlebot3_simulations/turtlebot3_gazebo
+
+//The directory containing a CMake configuration file for turtlebot3_msgs.
+turtlebot3_msgs_DIR:PATH=/opt/ros/melodic/share/turtlebot3_msgs/cmake
+
+//Value Computed by CMake
+turtlebot3_simulations_BINARY_DIR:STATIC=/home/dassdinho/catkin_ws_8/build/turtlebot3_simulations/turtlebot3_simulations
+
+//Value Computed by CMake
+turtlebot3_simulations_SOURCE_DIR:STATIC=/home/dassdinho/catkin_ws_8/src/turtlebot3_simulations/turtlebot3_simulations
+
 //The directory containing a CMake configuration file for urdf.
 urdf_DIR:PATH=/opt/ros/melodic/share/urdf/cmake
-
-//The directory containing a CMake configuration file for wfov_camera_msgs.
-wfov_camera_msgs_DIR:PATH=/opt/ros/melodic/share/wfov_camera_msgs/cmake
 
 //The directory containing a CMake configuration file for xacro.
 xacro_DIR:PATH=/opt/ros/melodic/share/xacro/cmake
@@ -1446,7 +1320,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=7
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=15
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -2077,7 +1951,5 @@ __pkg_config_checked_UUID:INTERNAL=1
 __pkg_config_checked_YAML:INTERNAL=1
 __pkg_config_checked_ZIP:INTERNAL=1
 __pkg_config_checked_ZeroMQ:INTERNAL=1
-//Result of TRY_COMPILE
-compile_result_unused:INTERNAL=FALSE
 prefix_result:INTERNAL=/usr/lib/x86_64-linux-gnu
 

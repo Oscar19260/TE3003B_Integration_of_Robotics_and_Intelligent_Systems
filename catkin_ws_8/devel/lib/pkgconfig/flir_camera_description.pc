@@ -1,8 +1,0 @@
-prefix=/home/dassdinho/catkin_ws_8/devel
-
-Name: flir_camera_description
-Description: Description of flir_camera_description
-Version: 0.2.5
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

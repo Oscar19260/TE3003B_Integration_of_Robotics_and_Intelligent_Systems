@@ -1,8 +1,0 @@
-prefix=/home/dassdinho/catkin_ws_8/install
-
-Name: jackal_control
-Description: Description of jackal_control
-Version: 0.8.6
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
