@@ -141,6 +141,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/dassdinho/catkin_ws_8/build/puzzlebot_control/cmake_install.cmake")
   include("/home/dassdinho/catkin_ws_8/build/turtlebot3_simulations/turtlebot3_fake/cmake_install.cmake")
   include("/home/dassdinho/catkin_ws_8/build/turtlebot3_simulations/turtlebot3_gazebo/cmake_install.cmake")
+  include("/home/dassdinho/catkin_ws_8/build/twist_practice/cmake_install.cmake")
   include("/home/dassdinho/catkin_ws_8/build/puzzlebot_sim/cmake_install.cmake")
 
 endif()

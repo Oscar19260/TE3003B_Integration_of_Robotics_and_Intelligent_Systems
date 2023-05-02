@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+
+    <include file="$(find puzzlebot_gazebo)/launch/puzzlebot_gazebo.launch"/>
+    
+    <node name="dass_robot_control" pkg="beginner_tutorials" type="dass_robot_control.py" output="screen"/>
+
+</launch>
+
