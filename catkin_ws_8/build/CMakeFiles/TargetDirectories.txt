@@ -188,13 +188,6 @@
 /home/dassdinho/catkin_ws_8/build/turtlebot3_simulations/turtlebot3_gazebo/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir
 /home/dassdinho/catkin_ws_8/build/turtlebot3_simulations/turtlebot3_gazebo/CMakeFiles/turtlebot3_drive.dir
 /home/dassdinho/catkin_ws_8/build/turtlebot3_simulations/turtlebot3_gazebo/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir
-/home/dassdinho/catkin_ws_8/build/twist_practice/CMakeFiles/install/strip.dir
-/home/dassdinho/catkin_ws_8/build/twist_practice/CMakeFiles/edit_cache.dir
-/home/dassdinho/catkin_ws_8/build/twist_practice/CMakeFiles/list_install_components.dir
-/home/dassdinho/catkin_ws_8/build/twist_practice/CMakeFiles/test.dir
-/home/dassdinho/catkin_ws_8/build/twist_practice/CMakeFiles/install/local.dir
-/home/dassdinho/catkin_ws_8/build/twist_practice/CMakeFiles/rebuild_cache.dir
-/home/dassdinho/catkin_ws_8/build/twist_practice/CMakeFiles/install.dir
 /home/dassdinho/catkin_ws_8/build/puzzlebot_sim/CMakeFiles/install/strip.dir
 /home/dassdinho/catkin_ws_8/build/puzzlebot_sim/CMakeFiles/install/local.dir
 /home/dassdinho/catkin_ws_8/build/puzzlebot_sim/CMakeFiles/test.dir

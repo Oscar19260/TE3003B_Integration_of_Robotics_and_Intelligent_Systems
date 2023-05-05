@@ -3517,24 +3517,6 @@ clean: turtlebot3_simulations/turtlebot3_gazebo/CMakeFiles/dynamic_reconfigure_g
 .PHONY : clean
 
 #=============================================================================
-# Directory level rules for directory twist_practice
-
-# Convenience name for "all" pass in the directory.
-twist_practice/all:
-
-.PHONY : twist_practice/all
-
-# Convenience name for "clean" pass in the directory.
-twist_practice/clean:
-
-.PHONY : twist_practice/clean
-
-# Convenience name for "preinstall" pass in the directory.
-twist_practice/preinstall:
-
-.PHONY : twist_practice/preinstall
-
-#=============================================================================
 # Directory level rules for directory puzzlebot_sim
 
 # Convenience name for "all" pass in the directory.

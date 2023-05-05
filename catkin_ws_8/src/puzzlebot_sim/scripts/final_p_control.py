@@ -32,7 +32,7 @@ class LocClass():
         self.f_v = 0.0
         self.f_w = 0.0
         
-        goal_dx, goal_dy = 0.0, 3.5
+        goal_dx, goal_dy = 0.1, 7.0
         
         self.flag = 0
         
@@ -44,6 +44,12 @@ class LocClass():
         self.pub_gtg_vel = rospy.Publisher('gtg_vel', Twist, queue_size=1)
         self.pub_ed      = rospy.Publisher('ed', Float32, queue_size=1)
         self.pub_ed_theta      = rospy.Publisher('ed_theta', Float32, queue_size=1) 
+        
+        self.pub_goal_x     = rospy.Publisher('goal_x', Float32, queue_size=1)
+        self.pub_goal_y     = rospy.Publisher('goal_y', Float32, queue_size=1)
+        
+        self.pub_xp         = rospy.Publisher('xp', Float32, queue_size=1)
+        self.pub_yp         = rospy.Publisher('yp', Float32, queue_size=1)
 
         ############################### SUBSCRIBERS #####################################  
 
@@ -77,7 +83,7 @@ class LocClass():
             edo = abs(self.ed)
             
             #Kl, Kt = 0.1, 0.25
-            Kt, alpha, kmax = 0.5, 1.0, 0.2
+            Kt, alpha, kmax = 2.0, 0.5, 0.1 # 0.5, 1.0, 0.2
             Kl = kmax * ((1.0-exp(-alpha*(abs(edo))**2))/(abs(edo)))
             
             self.f_v = Kl * self.ed
@@ -91,6 +97,14 @@ class LocClass():
             if (self.flag == 1): vel, self.f_v, self.f_w = Twist(), 0.0, 0.0
             
             
+            # pub goals and actual positions
+            
+            self.pub_goal_x.publish(goal_dx)
+            self.pub_goal_y.publish(goal_dy)
+            self.pub_xp.publish(self.dx)
+            self.pub_yp.publish(self.dy)
+            
+            ###
             
             self.pub_gtg_vel.publish(vel) # publish the robot's speed
             self.pub_ed.publish(edo)      # publish the distance between robot and goal
