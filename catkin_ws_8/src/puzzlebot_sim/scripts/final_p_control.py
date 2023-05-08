@@ -32,9 +32,9 @@ class LocClass():
         self.f_v = 0.0
         self.f_w = 0.0
         
-        goal_dx, goal_dy = 0.1, 7.0
+        goal_dx, goal_dy = 0.001, 6.0
         
-        self.flag = 0
+        self.flag = "Go to Goal"
         
         ###******* INIT PUBLISHERS *******###  
 
@@ -83,7 +83,15 @@ class LocClass():
             edo = abs(self.ed)
             
             #Kl, Kt = 0.1, 0.25
-            Kt, alpha, kmax = 2.0, 0.5, 0.1 # 0.5, 1.0, 0.2
+            #Kt, alpha, kmax = 1.6, 0.5, 0.2 # 0.5, 1.0, 0.2
+            
+            ######
+            # Angular
+            Kt          = 0.5 # 0.5 - 1.6
+            # Linear
+            alpha, kmax = 1.0, 0.2 # 1.0, 0.2
+            ######
+                        
             Kl = kmax * ((1.0-exp(-alpha*(abs(edo))**2))/(abs(edo)))
             
             self.f_v = Kl * self.ed
@@ -91,10 +99,10 @@ class LocClass():
             
             vel = Twist()
             
-            if (self.ed >= 0 and self.ed <= 0.20): self.flag = 1 # 0.40
+            if (self.ed >= 0 and self.ed <= 0.20): self.flag = "STOP GR" # 0.40
             else: vel.linear.x, vel.angular.z    = self.f_v, self.f_w
             
-            if (self.flag == 1): vel, self.f_v, self.f_w = Twist(), 0.0, 0.0
+            if (self.flag == "STOP GR"): vel, self.f_v, self.f_w = Twist(), 0.0, 0.0
             
             
             # pub goals and actual positions
@@ -113,8 +121,9 @@ class LocClass():
             #self.pub_cmd_vel.publish(vel) #publish the robot's speed  
 
             print("                         ")
+            print("GOAL X, Y       :    " + str(goal_dx) + ", " + str(goal_dy))
             #print("vel:          " + str(vel))
-            print("flag:         " + str(self.flag)) 
+            print("flag:         " + self.flag) 
             #print("V:          " + str(v)) 
             #print("W:          " + str(w)) 
             #print("D:          " + str(self.d)) 
@@ -129,7 +138,8 @@ class LocClass():
             print("============================")
 
             rate.sleep()  
-            if (self.flag == 1): exit()
+            
+            if (self.flag == "STOP GR"): exit()
 
     def wL_cb(self, wL):  
         ## This function receives a number   

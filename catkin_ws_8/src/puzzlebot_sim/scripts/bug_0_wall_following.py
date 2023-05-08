@@ -38,6 +38,8 @@ class WallFollowingControlClass():
         self.ed_theta_received          = False
         self.flag_wf                    = False
         self.flag                       = "go to goal"
+        
+        self.flag_current_state         = "gtg"
 
         #v_desired  = 0.4 #[m/s] desired speed when there are no obstacles 
 
@@ -54,8 +56,11 @@ class WallFollowingControlClass():
         self.ed_msg     = Float32()
         self.ed_theta_msg     = Float32()
         
-        epsilon     = 0.3
+        epsilon     = 0.5
         self.ed_tau = 0.0
+        
+        self.distance_H = 0.0   # Distance to HIT POINT
+        self.distance_L = 0.0   # Distance to LEAVE POINT
 
         rate = rospy.Rate(10) #10Hz is the lidar's frequency  
 
@@ -70,7 +75,7 @@ class WallFollowingControlClass():
             if self.laser_received and self.control_received and self.ed_received and self.ed_theta_received:
 
                 self.laser_received = False
-                dfw = min(self.lidar_msg.ranges)
+                #dfw = min(self.lidar_msg.ranges)
                 
                 vel_msg = Twist()
                 
@@ -99,6 +104,8 @@ class WallFollowingControlClass():
                 
                 theta_gtg = self.ed_theta_msg.data
                 
+                ####
+                """
                 if (self.ed_msg.data < 0 or self.ed_msg.data > 0.20):
                 
                     if (dfw <= 0.5): # 0.6
@@ -133,16 +140,107 @@ class WallFollowingControlClass():
                 else:
                     vel_msg.linear.x, vel_msg.angular.z = 0.0, 0.0
                     print("STOP")
+                """
+                ### OLDD
+                
+                ### NEW
+                
+                goal_distance = self.ed_msg.data    # Distance to goal [m]
+                
+                fw_distance = 0.4                   # Following wall distance [m] -- # 0.4
+                
+                target_position_tolerance = 0.20    # Target position tolerance [m] 
                 
                 
+                print("================ INIT")
+                
+                if (goal_distance < target_position_tolerance):      # At goal - Goal reached
+
+                    print("Goal reached STOP")
+                    self.flag_current_state = "stop"
+                    #print("Stop")
+                    vel_msg.linear.x, vel_msg.angular.z = 0.0, 0.0
+
+                elif self.flag_current_state == "gtg":                  # Go to goal
+
+                    if closest_range <= fw_distance: 
+
+                            # Implement the following walls behavior
+                        
+                        self.distance_H = goal_distance                # Save HIT POINT distance to goal
+
+                        print(" change to following walls") 
+
+                        self.flag_current_state = "Clockwise"                    
+
+                    else: 
+
+                        print("Moving to the Goal") 
+
+                        vel_msg.linear.x, vel_msg.angular.z = vel_gtg, w_gtg 
+
+
+
+                elif self.flag_current_state == "Clockwise":
+                
+                    self.distance_L = goal_distance                    # Save LEAVE POINT distance to goal EVERY TIME we are in WF behaviour
+
+                    if ((abs(theta_ao - theta_gtg) < np.pi/2) and (self.distance_L < abs(self.distance_H - epsilon))): # Output conditions of Wall Following behaviour ---> CLEAR SHOT and FAT GUARDS
+
+                        self.flag_current_state = "gtg"
+
+                        print("Change to Go to goal") 
+
+                    else:
+                        
+                        # Always one way
+                        
+                        #"""
+                        flag_cc_ccc = 1     # 0 --> Clockwise
+                                            # 1 --> Counterclockwise
+                        
+                        if flag_cc_ccc == 0:    theta_fw  = -np.pi/2 + theta_ao  # Clockwise behaviour
+                        else:                   theta_fw  = np.pi/2 + theta_ao   # Counterclockwise behaviour
+                        
+                        theta_fw = np.arctan2(np.sin(theta_fw), np.cos(theta_fw))
+                        
+                        #"""
+                        
+                        # Let the algorithm decide
+                        
+                        """
+                        theta_fwc   = -np.pi/2 + theta_ao
+                        theta_fwcc  = np.pi/2 + theta_ao
+                        
+                        theta_fwc   = np.arctan2(np.sin(theta_fwc), np.cos(theta_fwc))
+                        theta_fwcc  = np.arctan2(np.sin(theta_fwcc), np.cos(theta_fwcc))
+                        
+                        if (abs(theta_fwc - theta_gtg) <= np.pi/2): theta_fw = theta_fwc
+                        else: theta_fw = theta_fwcc
+                        
+                        #theta_fw = np.arctan2(np.sin(theta_fw), np.cos(theta_fw))
+                        
+                        """
+                        
+                        Kw = 1.6 # 1.3
+                        vel_msg.linear.x, vel_msg.angular.z = 0.12, Kw * theta_fw
+                 
+
+                elif self.flag_current_state == 'stop': 
+
+                    print("STOP")
+                    vel_msg.linear.x, vel_msg.angular.z = 0.0, 0.0
+                
+                
+                print("Actual State         : " + self.flag_current_state)
+                print("vel_x                : " + str(vel_msg.linear.x))
+                print("vel_z                : " + str(vel_msg.angular.z))
+                print("closest_range <= 0.4 : " + str(closest_range))
+                print("goal_distance or LP  : " + str(goal_distance))
+                print("GD or LP < THIS (FG) : " + str(abs(self.distance_H - epsilon)))
+                print("1.5708   > THIS (CS) : " + str(abs(theta_ao - theta_gtg)))
+                print("================ END")
                 print(" ")
-                print("vel_x        : " + str(vel_msg.linear.x))
-                print("vel_z        : " + str(vel_msg.angular.z))
-                print("dfw          : " + str(dfw))
-                print("goal         : " + self.flag)
-                print("ed_TAU       : " + str(self.ed_tau))
-                print("ed_actual    : " + str(self.ed_msg.data))
-                print("================")
 
             self.cmd_vel_pub.publish(vel_msg)
 
