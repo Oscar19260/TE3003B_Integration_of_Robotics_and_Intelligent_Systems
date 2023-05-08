@@ -32,7 +32,7 @@ class LocClass():
         self.f_v = 0.0
         self.f_w = 0.0
         
-        goal_dx, goal_dy = 0.001, 6.0
+        goal_dx, goal_dy = 3.0, 4.5
         
         self.flag = "Go to Goal"
         

@@ -72,15 +72,16 @@ class WallFollowingControlClass():
         self.goal_x, self.goal_y    = 0.0, 0.0
         self.xp, self.yp            = 0.0, 0.0
         
-        epsilon     = 0.3 # 0.3
+        epsilon     = 0.1 # 0.2
         self.ed_tau = 0.0
         
         self.distance_H = 0.0   # Distance to HIT POINT
         self.distance_L = 0.0   # Distance to LEAVE POINT
 
-        rate = rospy.Rate(10) #10Hz is the lidar's frequency  
+        freq = 10
+        rate = rospy.Rate(freq) #10Hz is the lidar's frequency  
 
-        print("Node initialized 1hz") 
+        print("Node initialized " + str(freq) + " hz") 
 
         ############################### MAIN LOOP ##################################### 
 
@@ -190,7 +191,7 @@ class WallFollowingControlClass():
                 
                 goal_distance = self.ed_msg.data    # Distance to goal [m]
                 
-                fw_distance = 0.4                   # Following wall distance [m] -- # 0.4
+                fw_distance = 0.3                   # Following wall distance [m] -- # 0.4
                 
                 target_position_tolerance = 0.20    # Target position tolerance [m] 
                 
@@ -272,7 +273,7 @@ class WallFollowingControlClass():
                         """
                         
                         Kw = 1.6 # 1.3
-                        vel_msg.linear.x, vel_msg.angular.z = 0.12, Kw * theta_fw
+                        vel_msg.linear.x, vel_msg.angular.z = 0.06, Kw * theta_fw   # 0.12
                  
 
                 elif self.flag_current_state == 'stop': 
@@ -284,7 +285,7 @@ class WallFollowingControlClass():
                 print("Actual State         : " + self.flag_current_state)
                 print("vel_x                : " + str(vel_msg.linear.x))
                 print("vel_z                : " + str(vel_msg.angular.z))
-                print("closest_range <= 0.4 : " + str(closest_range))
+                print("closest_range <= "+ str(fw_distance) + ": " + str(closest_range))
                 print("goal_distance or LP  : " + str(goal_distance))
                 print("GD or LP < THIS (FG) : " + str(abs(self.distance_H - epsilon)))
                 #print("1.5708   > THIS (CS) : " + str(abs(theta_ao - theta_gtg)))
