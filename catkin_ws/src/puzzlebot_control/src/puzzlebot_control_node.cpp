@@ -3,7 +3,7 @@
 #include <std_msgs/Float64.h>
 #include <std_msgs/Float32.h>
 #include <control_msgs/JointControllerState.h>
-#include "../include/puzzlebot_control/Shared.hpp"
+#include "puzzlebot_control/Shared.hpp"
 
 
 double v,w,w_r,w_l,prev_wl,prev_wr;
@@ -23,6 +23,7 @@ int main(int arc, char ** argv)
     w_l = 0;
     prev_wl = 0;
     prev_wr = 0;
+
 
     ros::NodeHandle nh;
     ros::Time current_time,prev_time;
@@ -48,6 +49,7 @@ int main(int arc, char ** argv)
     double L = params["L"];
     double R = params["R"];
     while(ros::ok()){
+
         ros::spinOnce();
 
         current_time = ros::Time::now();
