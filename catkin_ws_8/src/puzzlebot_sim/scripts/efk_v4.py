@@ -251,7 +251,7 @@ class EKFClass():
         zk_a = zm[1]
         # x2, y2, x1, y1 = m[0][0], m[1][0], miu_hat[0][0], miu_hat[1][0]
         z_hat_p = self.euclidian_distance( m[0][0], m[1][0], miu_hat[0][0], miu_hat[1][0] )
-        z_hat_a = np.arctan2( ( m[1][0] - miu_hat[1][0] ), ( m[0][0] - miu_hat[0][0] ) ) - miu[2][0]
+        z_hat_a = np.arctan2( ( m[1][0] - miu_hat[1][0] ), ( m[0][0] - miu_hat[0][0] ) ) - miu_hat[2][0]
         z_hat_a = np.arctan2( np.sin(z_hat_a), np.cos(z_hat_a) )
         zk    = np.array([[zk_p, zk_a]]).T
         z_hat = np.array([[z_hat_p, z_hat_a]]).T
@@ -363,7 +363,7 @@ class EKFClass():
         # Send the transformation 
         self.tf_br.sendTransform(t)
         
-    def fill_marker(self, pose_odometry = Odometry()): 
+    def fill_marker(self, pose_odometry=Odometry()): 
         # This function will fill the necessary data tu publish a marker to rviz.  
         # It receives pose_stamped which must be a [geometry_msgs/PoseStamped] message.  
         marker = Marker() 
