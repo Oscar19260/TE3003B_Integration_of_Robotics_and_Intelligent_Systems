@@ -32,7 +32,7 @@ class LocClass():
         self.f_v = 0.0
         self.f_w = 0.0
         
-        goal_dx, goal_dy = 3.0, 4.5
+        goal_dx, goal_dy = 0.3, 3.0
         
         self.flag = "Go to Goal"
         
@@ -87,15 +87,21 @@ class LocClass():
             
             ######
             # Angular
-            Kt          = 0.5 # 0.5 - 1.6
+            Kt          = 0.15 # 0.5 - 1.6
             # Linear
-            alpha, kmax = 1.0, 0.2 # 1.0, 0.2
+            alpha, kmax = 1.0, 0.15 # 1.0, 0.2
             ######
                         
             Kl = kmax * ((1.0-exp(-alpha*(abs(edo))**2))/(abs(edo)))
             
             self.f_v = Kl * self.ed
             self.f_w = Kt * self.etheta
+            
+            #if (self.f_v >= 0.1): self.f_v = 0.1
+            #if (self.f_v <= -0.1): self.f_v = -0.1
+            
+            #if (self.f_w >= 0.2): self.f_w = 0.2
+            #if (self.f_w <= -0.2): self.f_w = -0.2
             
             vel = Twist()
             

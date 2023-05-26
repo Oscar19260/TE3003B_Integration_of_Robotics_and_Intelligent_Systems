@@ -90,6 +90,10 @@ class DeadReckoningClass():
         
         self.time_ant, self.time_act = 0.0, 0.0
         
+        ############ KF and ArucoM --> Vars and Cons ###############
+        
+        #
+        
         ############ --------- ###############
 
         rate = rospy.Rate(freq) # The rate of the while loop will be the inverse of the desired delta_t ---> 50
@@ -114,8 +118,10 @@ class DeadReckoningClass():
             w = (self.r / self.L) * (self.wr - self.wl)
             
             ####### Get pose and stamp it ############# 
+            ####### KF --> predict AND correct #############
 
-            [x, y, theta, cov_mat_final] = self.get_robot_pose(v, w, self.wr, self.wl, delta_t) 
+            [x, y, theta, cov_mat_final] = self.kf_predict(v, w, self.wr, self.wl, delta_t) #predict KF
+            [x, y, theta, cov_mat_final] = self.kf_correct(x, y, theta, cov_mat_final, m_detected, Rk) #correct KF
 
             pose_stamped = self.get_pose_stamped(x, y, theta, v, w, cov_mat_final)
 
@@ -240,7 +246,7 @@ class DeadReckoningClass():
 
          
 
-    def get_robot_pose(self, v, w, wr, wl, delta_t): 
+    def kf_predict(self, v, w, wr, wl, delta_t): 
 
         #This functions receives the robot speed v [m/s] and w [rad/s] 
 
@@ -317,8 +323,78 @@ class DeadReckoningClass():
         #print(" cov_mat_final:", np.shape(cov_mat_final))
         
         cov_mat_final_list =  cov_mat_final.tolist()
+        
 
         return [x, y, theta, cov_mat_final_list]
+        
+        
+    def kf_correct(self, x, y, theta, Ek_hat, m_detected, Rk):
+
+        # Kalman Filter Corrrection Stage
+        
+        ## INITIAL ##
+        
+        s_hat   = np.array([[x, y, theta]]).T
+        miu_hat = np.array([[x, y, theta]]).T
+        m       = np.array([[m_detected[0], m_detected[1]]]).T  # value from Aruco Cam --> WAIT
+        
+        ######## Calculate Gk #########
+        
+        delta_x = m[0][0] - s_hat[0][0]
+        delta_y = m[1][0] - s_hat[1][0]
+        p       = delta_x**2 + delta_y**2
+            
+        Gk = np.array([[-delta_x / np.sqrt(p), -delta_y / np.sqrt(p),  0], 
+                       [          delta_y / p,          -delta_x / p, -1]])
+        
+        ######## Calculate Zk #########
+            
+        Zk = Gk.dot(Ek_hat).dot(Gk.T) + Rk
+        
+        ######## Calculate Kk #########
+            
+        Kk = Ek_hat.dot(Gk.T).dot( np.linalg.inv(Zk) ) + Rk
+        
+        ######## Calculate zk AND z_hat #########
+        
+        a
+            
+        zk    = 
+        z_hat = 
+        
+        # LAST ####### Calculate miu_K #########
+            
+        miu_K = miu_hat + Kk.dot(zk - z_hat)
+        
+        # LAST ####### Calculate Ek #########
+        
+        I = np.eye() ## Cuanto
+        
+        Ek = (I - Kk.dot(Gk)).dot(Ek_hat)
+        
+        
+        ############ UPDATE VALUES ################
+                
+        cov_mat_final = np.zeros(36)
+        
+        # Diagonal
+        cov_mat_final[0]   = Ek[0][0]   # xx
+        cov_mat_final[7]   = Ek[1][1]   # yy
+        cov_mat_final[35]  = Ek[2][2]   # tt
+        # Else
+        cov_mat_final[1]   = Ek[0][1]  # xy
+        cov_mat_final[5]   = Ek[0][2]  # xt
+        cov_mat_final[6]   = Ek[1][0]  # yx
+        cov_mat_final[11]  = Ek[1][2]  # yt
+        cov_mat_final[30]  = Ek[2][0]  # tx
+        cov_mat_final[31]  = Ek[2][1]  # ty
+        
+        #print(" cov_mat_final:", np.shape(cov_mat_final))
+        
+        cov_mat_final_list =  cov_mat_final.tolist()
+        
+
+        return [miu_K[0][0], miu_K[1][0], miu_K[2][0], cov_mat_final_list]
         
     
     def send_base_link_tf(self, pose_stamped=Odometry()): 

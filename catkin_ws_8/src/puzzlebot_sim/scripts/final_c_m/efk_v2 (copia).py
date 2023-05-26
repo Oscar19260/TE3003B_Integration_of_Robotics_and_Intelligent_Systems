@@ -15,10 +15,7 @@ from visualization_msgs.msg import Marker
 
 from tf.transformations import quaternion_from_euler, euler_from_quaternion
 
-from geometry_msgs.msg import TransformStamped
-
-from gazebo_msgs.msg import ModelStates   # Gazebo
-
+from geometry_msgs.msg import TransformStamped, Vector3
  
 
 #This class will do the following: 
@@ -38,33 +35,46 @@ class DeadReckoningClass():
 
         # Create the subscribers to wr and wl topics
         
-        rospy.Subscriber("wr_rviz", Float32, self.wr_cb)
+        rospy.Subscriber("wr", Float32, self.wr_cb)
+        rospy.Subscriber("wl", Float32, self.wl_cb)
         
-        rospy.Subscriber("wl_rviz", Float32, self.wl_cb)
         
-        rospy.Subscriber("gazebo/model_states", ModelStates, self.gazebo_states_cb) # Gazebo
-
+        rospy.Subscriber("r_vect", Vector3, self.r_vect_cb)
+        rospy.Subscriber("aruco_pos", Vector3, self.aruco_pos_cb)
+        rospy.Subscriber("robot_aruco", Vector3, self.robot_aruco_cb)
+        
         # Create ROS publishers 
         
         self.tf_br = tf2_ros.TransformBroadcaster()
 
-        self.odom_pub = rospy.Publisher('odom', Odometry, queue_size=1) # Publisher to odom topic 
+        self.odom_dr_pub    = rospy.Publisher('odom_dr', Odometry, queue_size=1) # Publisher to odom_DR topic 
+        self.odom_ekf_pub   = rospy.Publisher('odom_ekf', Odometry, queue_size=1) # Publisher to odom_EKF topic
         
-        #self.marker_pub = rospy.Publisher("/odom_robot_marker", Marker, queue_size = 2)  # Publisher to odom_robot marker
+        self.marker_pub = rospy.Publisher("/odom_robot_marker", Marker, queue_size=1)  # Publisher to odom_robot marker
         
-        self.marker_gazebo_pub = rospy.Publisher("/gazebo_odom_robot_marker", Marker, queue_size = 1)  # Publisher to gazebo_odom_robot marker
+        
+        self.est_pose_robot_pub   = rospy.Publisher('est_pose_robot', Vector3, queue_size=1)
 
         ############ ROBOT CONSTANTS ################  
 
         self.r = 0.05 # puzzlebot wheel radius [m] or 0.05 or 0.065
 
-        self.L = 0.18 # puzzlebot wheel separation [m] or 0.18 or 0.19
+        self.L = 0.19 # puzzlebot wheel separation [m] or 0.18 or 0.19
 
         self.delta_t = 0.0 # Desired time to update the robot's pose [s] 
         
         freq = 50 # Hz
 
         ############ Variables ############### 
+        ### NEW
+        
+        self.r_vect         = Vector3()
+        self.aruco_pos      = Vector3()
+        self.robot_aruco    = Vector3()
+        
+        self.est_pose_robot = Vector3()
+        
+        ###
         
         self.wr, self.wl = 0.0, 0.0
         
@@ -77,20 +87,11 @@ class DeadReckoningClass():
         
         self.cov_mat_act, self.cov_mat_ant = np.zeros([3,3]), np.zeros([3,3])
         
-        #self.cov_mat_final = np.zeros(36)
-        
-        self.gazebo_states = [0]*3
-        
-        
-        self.kr, self.kl = 6.0, 6.0 # 0.1, 0.1            ################################################## TUNE ##################################################
-        
-        
-        #self.pose_odometry = Odometry() 
+        self.kr, self.kl = 6.0, 6.0 # 0.1, 0.1            ################################################## TUNE DR COV MATRIX ################################################## 
         
         
         self.time_ant, self.time_act = 0.0, 0.0
         
-        ############ --------- ###############
 
         rate = rospy.Rate(freq) # The rate of the while loop will be the inverse of the desired delta_t ---> 50
 
@@ -103,6 +104,9 @@ class DeadReckoningClass():
             
             delta_t = self.delta_t
             
+            
+            aruco_detect = self.###
+            
             ######## Acquire Gazebo Pose #################
             
             x_gaz, y_gaz, yaw_gaz = self.gazebo_states
@@ -114,8 +118,16 @@ class DeadReckoningClass():
             w = (self.r / self.L) * (self.wr - self.wl)
             
             ####### Get pose and stamp it ############# 
-
-            [x, y, theta, cov_mat_final] = self.get_robot_pose(v, w, self.wr, self.wl, delta_t) 
+            ####### KF --> predict AND correct #############
+            
+            # Always PREDICT/DR
+            [x, y, theta, cov_mat_final, Ek] = self.kf_predict(v, w, self.wr, self.wl, delta_t) #predict KF
+            
+            # If ARUCO DETECT
+            if aruco_flag == 1:
+                
+                m_detected = self.
+                [x, y, theta, cov_mat_final] = self.kf_correct(x, y, theta, Ek, m_detected, Rk) #correct KF
 
             pose_stamped = self.get_pose_stamped(x, y, theta, v, w, cov_mat_final)
 
@@ -146,21 +158,6 @@ class DeadReckoningClass():
             
      
     ############ Methods  #################
-    
-    def gazebo_states_cb(self, data):
-    
-        try:
-            aux_idx = data.name.index("puzzlebot")
-
-            quat = [data.pose[aux_idx].orientation.x, data.pose[aux_idx].orientation.y, data.pose[aux_idx].orientation.z, data.pose[aux_idx].orientation.w]
-            r,p,y = euler_from_quaternion(quat)
-
-            self.gazebo_states[0] = data.pose[aux_idx].position.x
-            self.gazebo_states[1] = data.pose[aux_idx].position.y
-            self.gazebo_states[2] = y
-            
-        except:
-            pass
              
     def wr_cb(self, msg):
     
@@ -178,7 +175,12 @@ class DeadReckoningClass():
 
         self.w = msg.angular.z
         
-
+    def euclidian_distance(self, x2, y2, x1, y1):
+        
+        dis = np.sqrt( (x2 - x1)**2 + (y2 - y1)**2 )
+        
+        return dis
+        
     def get_pose_stamped(self, x, y, yaw, v, w, cov_mat_final): 
 
         # x, y and yaw are the robot's position (x,y) and orientation (yaw) 
@@ -240,7 +242,7 @@ class DeadReckoningClass():
 
          
 
-    def get_robot_pose(self, v, w, wr, wl, delta_t): 
+    def kf_predict(self, v, w, wr, wl, delta_t): 
 
         #This functions receives the robot speed v [m/s] and w [rad/s] 
 
@@ -268,20 +270,20 @@ class DeadReckoningClass():
         ############ COVARIANCE POSE MATRIX   ################
         
         Nabla_wk = 0.5 * self.r * delta_t * np.array([[np.cos(self.theta_ant), np.cos(self.theta_ant)], 
-                                                           [np.sin(self.theta_ant), np.sin(self.theta_ant)], 
-                                                           [2/self.L, -2/self.L]])
+                                                      [np.sin(self.theta_ant), np.sin(self.theta_ant)], 
+                                                      [              2/self.L,              -2/self.L]])
         #print("Nabla_wk:", np.shape(Nabla_wk))
         
-        E_delta_k = np.array([[self.kr * abs(wr), 0], 
-                              [0, self.kl * abs(wl)]])
+        E_delta_k = np.array([[self.kr * abs(wr),                 0], 
+                              [                0, self.kl * abs(wl)]])
         #print("E_delta_k:", np.shape(E_delta_k))
         
         Qk = Nabla_wk.dot(E_delta_k).dot(Nabla_wk.T)
         #print("Qk:", np.shape(Qk))
         
         Hk = np.array([[1, 0, -delta_t * v * np.sin(self.theta_ant)], 
-                       [0, 1, delta_t * v * np.cos(self.theta_ant)], 
-                       [0, 0, 1]])
+                       [0, 1,  delta_t * v * np.cos(self.theta_ant)], 
+                       [0, 0,                                    1]])
         #print("Hk:", np.shape(Hk))
         
         
@@ -317,8 +319,83 @@ class DeadReckoningClass():
         #print(" cov_mat_final:", np.shape(cov_mat_final))
         
         cov_mat_final_list =  cov_mat_final.tolist()
+        
 
-        return [x, y, theta, cov_mat_final_list]
+        return [x, y, theta, cov_mat_final_list, Ek]
+        
+        
+    def kf_correct(self, x, y, theta, Ek_hat, m_detected, Rk):
+
+        # Kalman Filter Corrrection Stage
+        
+        ## INITIAL ##
+        
+        s_hat   = np.array([[x, y, theta]]).T
+        miu_hat = np.array([[x, y, theta]]).T
+        m       = np.array([[m_detected[0], m_detected[1]]]).T  # value from Aruco Cam --> WAIT
+        
+        ######## Calculate Gk #########
+        
+        delta_x = m[0][0] - s_hat[0][0]
+        delta_y = m[1][0] - s_hat[1][0]
+        p       = delta_x**2 + delta_y**2
+            
+        Gk = np.array([[-delta_x / np.sqrt(p), -delta_y / np.sqrt(p),  0], 
+                       [          delta_y / p,          -delta_x / p, -1]])
+        
+        ######## Calculate Zk #########
+            
+        Zk = Gk.dot(Ek_hat).dot(Gk.T) + Rk
+        
+        ######## Calculate Kk #########
+            
+        Kk = Ek_hat.dot(Gk.T).dot( np.linalg.inv(Zk) ) + Rk
+        
+        ######## Calculate zk AND z_hat #########
+        
+        zk_p = s
+        zk_a = s
+        
+        z_hat_p = self.euclidian_distance( m[0][0], m[1][0], miu_hat[0][0], miu_hat[1][0] ) + Rk[0][0]
+        z_hat_a = np.arctan2( ( m[1][0] - miu_hat[1][0] ), ( m[0][0] - miu_hat[0][0] ) ) - miu[2][0] + Rk[1][1]
+        z_hat_a = np.arctan2( np.sin(z_hat_a), np.cos(z_hat_a) )
+            
+        zk    = np.array([[zk_p, zk_a]]).T
+        z_hat = np.array([[z_hat_p, z_hat_a]]).T
+        
+        # LAST ####### Calculate miu_K #########
+            
+        miu_K = miu_hat + Kk.dot(zk - z_hat)
+        
+        # LAST ####### Calculate Ek #########
+        
+        I = np.eye() ## Cuanto
+        
+        Ek = (I - Kk.dot(Gk)).dot(Ek_hat)
+        
+        
+        ############ UPDATE VALUES ################
+                
+        cov_mat_final = np.zeros(36)
+        
+        # Diagonal
+        cov_mat_final[0]   = Ek[0][0]   # xx
+        cov_mat_final[7]   = Ek[1][1]   # yy
+        cov_mat_final[35]  = Ek[2][2]   # tt
+        # Else
+        cov_mat_final[1]   = Ek[0][1]  # xy
+        cov_mat_final[5]   = Ek[0][2]  # xt
+        cov_mat_final[6]   = Ek[1][0]  # yx
+        cov_mat_final[11]  = Ek[1][2]  # yt
+        cov_mat_final[30]  = Ek[2][0]  # tx
+        cov_mat_final[31]  = Ek[2][1]  # ty
+        
+        #print(" cov_mat_final:", np.shape(cov_mat_final))
+        
+        cov_mat_final_list =  cov_mat_final.tolist()
+        
+
+        return [miu_K[0][0], miu_K[1][0], miu_K[2][0], cov_mat_final_list]
         
     
     def send_base_link_tf(self, pose_stamped=Odometry()): 
