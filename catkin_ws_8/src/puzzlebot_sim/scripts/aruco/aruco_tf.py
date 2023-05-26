@@ -37,9 +37,11 @@ class ArucoClass():
         #   o   p   q   r   s   t   u   v   q   x   y   z
         # 717 718 719 720 721 722 723 724 725 726 727 728
         self.aruco_dict = {
-            "701": [1.0, 3.0],
-            "702": [-1.0, 3.0],
-            "703": [-1.0, -2.0]
+            "701": [0.48, 3.15],
+            "702": [2.29, 2.85],
+            "703": [1.04, 4.65],
+            "704": [1.43, 2.45],
+            "705": [1.20, 0.98]
         }
 
         # ----- VARIABLES   -----
@@ -53,7 +55,7 @@ class ArucoClass():
         self.aruco_y = 0.0
 
         self.aruco_r = Vector3()
-        self.r_vect = [0.1, 0.06, 0.0]
+        self.r_vect = [0.01, 0.02, 0.0]
 
         self.aruco_est = Vector3()
         self.aruco_dist = 0.0
@@ -75,6 +77,10 @@ class ArucoClass():
                     self.aruco_x, self.aruco_y = self.aruco_dict["702"][0], self.aruco_dict["702"][1]
                 elif id == 703:
                     self.aruco_x, self.aruco_y = self.aruco_dict["703"][0], self.aruco_dict["703"][1]
+                elif id == 704:
+                    self.aruco_x, self.aruco_y = self.aruco_dict["704"][0], self.aruco_dict["704"][1]
+                elif id == 705:
+                    self.aruco_x, self.aruco_y = self.aruco_dict["705"][0], self.aruco_dict["705"][1]
 
                 position = [round(msg.transforms[0].transform.translation.x, 5),
                             round(msg.transforms[0].transform.translation.y, 5),
@@ -93,6 +99,7 @@ class ArucoClass():
                 self.detected_id.data = id
                 self.position_array.data = position
                 self.rotation_array.data = rotation
+
                 # Check ID
                 # if id == self.aaron_id:
                 print("\n========== INFO INIT ==========")
@@ -100,11 +107,13 @@ class ArucoClass():
                 print("Position [X, Y, Z]: " + str(position))
                 print("Rotation [X, Y, Z]: " + str(rotation))
                 print("========== INFO END  ==========")
-                # Assemble vectors
+
+                # Assemble vectors for EKF
                 self.aruco_info.x, self.aruco_info.y, self.aruco_info.z = self.flag, self.aruco_x, self.aruco_y
                 self.aruco_r.x, self.aruco_r.y, self.aruco_r.z = self.r_vect[0], self.r_vect[1], self.r_vect[2]
                 self.aruco_est.x, self.aruco_est.y, self.aruco_est.z = self.aruco_dist, self.aruco_ang, 0.0
-                # Publish info for the right marker
+                
+                # Publish info
                 self.aruco_pub.publish(self.aruco_info)
                 self.r_vect_pub.publish(self.aruco_r)
                 self.robot_aruco_pub.publish(self.aruco_est)
@@ -112,8 +121,6 @@ class ArucoClass():
                 self.position_pub.publish(self.position_array)
                 self.rotation_pub.publish(self.rotation_array)
                 self.transform("marker_" + str(id), position, rotation)
-                # else:
-                #     print("Wrong Marker! (" + str(id) + ")")
             except Exception as error:
                 self.flag = 0.0
                 self.aruco_x = 0.0
