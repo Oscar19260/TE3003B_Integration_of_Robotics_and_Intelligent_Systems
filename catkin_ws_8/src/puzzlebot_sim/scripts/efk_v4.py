@@ -382,8 +382,8 @@ class EKFClass():
         zk_a = zm[1]
         
         # x2, y2, x1, y1 = m[0][0], m[1][0], miu_hat[0][0], miu_hat[1][0]
-        z_hat_p = self.euclidian_distance( m[0][0], m[1][0], miu_hat[0][0], miu_hat[1][0] ) + Rk[0][0]
-        z_hat_a = np.arctan2( ( m[1][0] - miu_hat[1][0] ), ( m[0][0] - miu_hat[0][0] ) ) - miu[2][0] + Rk[1][1]
+        z_hat_p = self.euclidian_distance( m[0][0], m[1][0], miu_hat[0][0], miu_hat[1][0] )
+        z_hat_a = np.arctan2( ( m[1][0] - miu_hat[1][0] ), ( m[0][0] - miu_hat[0][0] ) ) - miu[2][0]
         z_hat_a = np.arctan2( np.sin(z_hat_a), np.cos(z_hat_a) )
             
         zk    = np.array([[zk_p, zk_a]]).T
