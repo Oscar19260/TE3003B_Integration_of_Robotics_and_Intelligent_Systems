@@ -47,7 +47,7 @@ class WallFollowingControlClass():
         
         self.flag_current_state         = "gtg"
         
-        self.v_sp_received = True
+        self.v_sp_received = False
 
         #v_desired  = 0.4 #[m/s] desired speed when there are no obstacles 
 
@@ -64,7 +64,7 @@ class WallFollowingControlClass():
         self.ed_msg     = Float32()
         self.ed_theta_msg     = Float32()
         
-        epsilon     = 0.2 # 0.2
+        epsilon     = 0.2 # 0.1
         self.ed_tau = 0.0
         
         self.distance_H = 0.0   # Distance to HIT POINT
@@ -113,8 +113,6 @@ class WallFollowingControlClass():
                 
                 theta_gtg = self.ed_theta_msg.data
                 
-                print(closest_range)
-                
                 ####
                 """
                 if (self.ed_msg.data < 0 or self.ed_msg.data > 0.20):
@@ -158,7 +156,7 @@ class WallFollowingControlClass():
                 
                 goal_distance = self.ed_msg.data    # Distance to goal [m]
                 
-                fw_distance = 0.30                   # Following wall distance [m] -- # 0.25
+                fw_distance = 0.30                   # Following wall distance [m] -- # 0.4
                 
                 target_position_tolerance = 0.10    # Target position tolerance [m] 
                 
@@ -167,10 +165,10 @@ class WallFollowingControlClass():
                 
                 if (goal_distance < target_position_tolerance):      # At goal - Goal reached
 
-                    print("Goal reached STOP-GOAL")
-                    self.flag_current_state = "gtg"
+                    print("Goal reached STOP")
+                    self.flag_current_state = "stop"
                     #print("Stop")
-                    #vel_msg.linear.x, vel_msg.angular.z = 0.0, 0.0
+                    vel_msg.linear.x, vel_msg.angular.z = 0.0, 0.0
 
                 elif self.flag_current_state == "gtg":                  # Go to goal
 
@@ -214,8 +212,8 @@ class WallFollowingControlClass():
                 
                     self.distance_L = goal_distance                    # Save LEAVE POINT distance to goal EVERY TIME we are in WF behaviour
 
-                    #if ((abs(abs(theta_ao) - abs(theta_gtg)) <= np.pi/2) -- if (( abs(theta_ao - theta_gtg) <= np.pi/2 )
-                    if ((abs(abs(theta_ao) - abs(theta_gtg)) <= np.pi/2) and (self.distance_L < abs(self.distance_H - epsilon))): # Output conditions of Wall Following behaviour ---> CLEAR SHOT and FAT GUARDS
+                    #if ((abs(abs(theta_ao) - abs(theta_gtg)) < np.pi/2)
+                    if (( abs(theta_ao - theta_gtg) <= np.pi/2 ) and (self.distance_L < abs(self.distance_H - epsilon))): # Output conditions of Wall Following behaviour ---> CLEAR SHOT and FAT GUARDS
 
                         self.flag_current_state = "gtg"
 
@@ -244,7 +242,7 @@ class WallFollowingControlClass():
                         theta_fw = np.arctan2(np.sin(theta_fw), np.cos(theta_fw))
                         
                         
-                        Kw = 0.72 # 0.55
+                        Kw = 0.55 # 1.3
                         vel_msg.linear.x, vel_msg.angular.z = 0.06, Kw * theta_fw   # 0.12
                         
                         valo = 0.3

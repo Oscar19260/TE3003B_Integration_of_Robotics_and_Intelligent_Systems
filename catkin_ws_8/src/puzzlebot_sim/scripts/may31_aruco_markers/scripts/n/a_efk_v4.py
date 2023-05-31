@@ -47,14 +47,13 @@ class EKFClass():
         freq = 50 # Hz
 
         ############ Variables ############### 
-        init_pose = [2.39, 0.0000000000000000000001, np.pi/2]              # INIT POSE
+        init_pose = [0.0000000000000000000001, 0.0000000000000000000001, 0.0]              # INIT POSE
         
         self.r_vect         = Vector3()
         self.aruco_pos      = Vector3()
         self.robot_aruco    = Vector3()
         
         d_gtg               = Vector3() # dx, dy AND dtheta for GTG_control NONE
-        start_pos           = Vector3()
         
         odom_dr     = []
         odom_ekf    = []
@@ -161,7 +160,7 @@ class EKFClass():
             start_pos.y = init_pose[1]
             start_pos.z = init_pose[2]
                         
-            self.start_pos_pub.publish(start_pos)
+            self.start_pos_pub(start_pos)
             
             self.est_pose_robot_pub.publish(d_gtg)
             

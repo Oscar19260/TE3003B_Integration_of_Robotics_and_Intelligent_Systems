@@ -37,11 +37,11 @@ class ArucoClass():
         #   o   p   q   r   s   t   u   v   q   x   y   z
         # 717 718 719 720 721 722 723 724 725 726 727 728
         self.aruco_dict = {
-            "701": [0.48, 3.15],
-            "702": [2.90, 2.94],
-            "703": [1.52, 4.77],
-            "704": [1.43, 2.45],
-            "705": [1.20, 0.98] #[1.20, 0.98]
+            "701": [3.28, 0.89],
+            "702": [2.29, 2.85],
+            "703": [1.04, 4.65],
+            "704": [1.38, -0.60],
+            "705": [-0.60, 0.30] #[1.20, 0.98]
         }
 
         self.dx_cam = 0.082
@@ -75,7 +75,7 @@ class ArucoClass():
                 self.aruco_ang = np.arctan2(ryaruco, rxaruco)
                 self.aruco_dist = np.sqrt(rxaruco**2 + ryaruco**2)
                 print("Distance: " + str(self.aruco_dist))
-                if self.aruco_dist > 2.0:
+                if self.aruco_dist > 1.0:
                     self.aruco_info.x = 0.0
                     print("Ignored")
                     pass

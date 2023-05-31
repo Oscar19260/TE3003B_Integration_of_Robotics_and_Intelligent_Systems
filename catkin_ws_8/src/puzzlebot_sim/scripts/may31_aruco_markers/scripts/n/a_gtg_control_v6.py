@@ -31,7 +31,7 @@ class GTGClass():
         
         #goals = [ [0.35, 2.8], [0.38, 3.86], [2.0, 2.8], [1.5, 0.2], [0.60, 0.15] ]
         #goals = [ [0.55, 0.80] ]
-        goals = [ [2.06, 1.50], [0.36, 2.70], [2.10, 3.58], [1.19, 4.17], [2.10, 3.58], [2.39, 0.0000000000001] ]   #2.06, 1.50
+        goals = [ [2.38, 1.19], [2.50, -0.6], [0.0000000001, 0.0000000001] ]
         self.id_goal_act    = 0
         self.id_goal_prev   = -1
         
@@ -75,19 +75,14 @@ class GTGClass():
             id_now  = self.id_goal_act
             id_prev = self.id_goal_prev
             
-            print(id_now)
-            print(id_prev)
-            print("")
             
             try:
                 ## ENOUGH GOALS
                 goal_dx, goal_dy = goals[id_now][0], goals[id_now][1]
                 self.flag = "Go to Goal"
                 
-                if (id_prev != id_now):
+                if (id_prev != id_act):
                     self.flag_id_change = 1
-                    print("ID_DIFF")
-                    print("")
                 
                 self.id_goal_prev = id_now
                 
@@ -106,7 +101,6 @@ class GTGClass():
                 
                 edo = val
                 self.etheta = val
-                self.ed = val
                 
             
             if (self.flag == "Stop"):
@@ -131,9 +125,6 @@ class GTGClass():
                 
                 edo = abs(self.ed)
                 
-                print(abs(self.etheta))
-                print("")
-                
                 #Kl, Kt = 0.1, 0.25
                 #Kt, alpha, kmax = 1.6, 0.5, 0.2 # 0.5, 1.0, 0.2
                 
@@ -151,43 +142,22 @@ class GTGClass():
                 
                 ### Limit angular velocity ###
                 
-                #thresh_fw = 0.15
+                thresh_fw = 0.2
                 
-                #if (self.f_w >= thresh_fw): self.f_w = thresh_fw
-                #if (self.f_w <= -thresh_fw): self.f_w = -thresh_fw
-                
-                #print(vel.linear.x)
-                #print(vel.angular.z)
+                if (self.f_w >= thresh_fw): self.f_w = thresh_fw
+                if (self.f_w <= -thresh_fw): self.f_w = -thresh_fw
                 
                 ### Rotate then do usual ###
                 
-                thresh_theta = pi/8
-                
-                print(thresh_theta)
-                print("")
+                thresh_theta = np.pi/4
                 
                 if (self.flag_id_change == 1):
-                    print("F_ID_CHANGE = 1")
-                    if ( abs(self.etheta) > 0.0 and abs(self.etheta) < thresh_theta ):
+                    if (abs(self.etheta) <= thresh_theta):
                         self.flag_id_change = 0
-                        print("WELL ALIGNED")
                     else:
-                        print("JUST FW")
                         self.f_v = 0.0
-                        
-                        ### Limit angular velocity ###
-                
-                        thresh_fw = 0.2
-                        
-                        if (self.f_w >= thresh_fw): self.f_w = thresh_fw
-                        if (self.f_w <= -thresh_fw): self.f_w = -thresh_fw
-                        
                 else:
-                    print("F_ID_CHANGE = 0")
                     pass
-                    
-                #print(vel.linear.x)
-                #print(vel.angular.z)
             
                 ### Errors and P control ###
                 
@@ -204,9 +174,6 @@ class GTGClass():
                     
                 else:                                   # ELSE JUST USE v AND w velocities for GTG calculated
                     vel.linear.x, vel.angular.z = self.f_v, self.f_w
-                    
-                #print(vel.linear.x)
-                #print(vel.angular.z)
             
             # pub goals and actual positions
             

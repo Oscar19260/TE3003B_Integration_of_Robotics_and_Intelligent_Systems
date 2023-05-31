@@ -75,7 +75,7 @@ class ArucoClass():
                 self.aruco_ang = np.arctan2(ryaruco, rxaruco)
                 self.aruco_dist = np.sqrt(rxaruco**2 + ryaruco**2)
                 print("Distance: " + str(self.aruco_dist))
-                if self.aruco_dist > 2.0:
+                if self.aruco_dist > 1.0:
                     self.aruco_info.x = 0.0
                     print("Ignored")
                     pass
