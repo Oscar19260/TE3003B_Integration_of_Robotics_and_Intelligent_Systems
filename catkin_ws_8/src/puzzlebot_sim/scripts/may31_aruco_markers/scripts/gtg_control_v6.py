@@ -38,6 +38,10 @@ class GTGClass():
         self.flag_id_change = 0
         self.flag = "Go to Goal"
         
+        delay = 2.0
+        goal_reached = 1
+        actual_time = 0.0
+        
         ###******* INIT PUBLISHERS *******###
           
         self.pub_gtg_vel = rospy.Publisher('gtg_vel', Twist, queue_size=1)
@@ -70,6 +74,7 @@ class GTGClass():
             
             id_now  = self.id_goal_act
             id_prev = self.id_goal_prev
+            
             
             try:
                 ## ENOUGH GOALS
@@ -157,7 +162,15 @@ class GTGClass():
                 ### Errors and P control ###
                 
                 if (self.ed >= 0 and self.ed <= 0.10):  # IF CLOSE ENOUGH TO THE GOAL --> CHANGE ID TO NEXT GOAL
-                    self.id_goal_act +=1
+                    if(goal_reached == 1):
+                        time_goal = rospy.get_time()
+                        goal_reached = 0
+                        
+                    if ((actual_time - time_goal) >= delay):
+                        self.id_goal_act +=1
+                        goal_reached = 1
+                    else:
+                        actual_time = rospy.get_time()
                     
                 else:                                   # ELSE JUST USE v AND w velocities for GTG calculated
                     vel.linear.x, vel.angular.z = self.f_v, self.f_w

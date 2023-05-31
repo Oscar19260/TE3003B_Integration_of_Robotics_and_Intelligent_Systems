@@ -37,6 +37,8 @@ class EKFClass():
         self.marker_ekf_pub = rospy.Publisher("/odom_robot_marker", Marker, queue_size=1)  # Publisher to odom_robot marker
         
         self.est_pose_robot_pub   = rospy.Publisher('est_pose_robot', Vector3, queue_size=1)
+        
+        self.start_pos_pub   = rospy.Publisher('start_pos', Vector3, queue_size=1)
 
         ############ ROBOT CONSTANTS ################  
         self.r = 0.05 # puzzlebot wheel radius [m] or 0.05 or 0.065
@@ -45,7 +47,7 @@ class EKFClass():
         freq = 50 # Hz
 
         ############ Variables ############### 
-        init_pose = [0.0000000000000000000001, 0.0000000000000000000001]              # INIT POSE
+        init_pose = [0.0000000000000000000001, 0.0000000000000000000001, 0.0]              # INIT POSE
         
         self.r_vect         = Vector3()
         self.aruco_pos      = Vector3()
@@ -62,7 +64,7 @@ class EKFClass():
         
         self.x_act, self.x_ant          = 0.0, init_pose[0]
         self.y_act, self.y_ant          = 0.0, init_pose[1]
-        self.theta_act, self.theta_ant  = 0.0, 0.0
+        self.theta_act, self.theta_ant  = 0.0, init_pose[2]
         
         self.theta_r_act, self.theta_r_ant  = 0.0, 0.0
         self.theta_l_act, self.theta_l_ant  = 0.0, 0.0
@@ -151,7 +153,14 @@ class EKFClass():
 
             self.marker_ekf_pub.publish(marker_ekf)
             
-            ######## Publish dx, dy AND dtheta to GTG_control #########
+            ######## Publish dx, dy AND dtheta to GTG_control --- AND Start Position #########
+            
+            start_pos = Vector3()
+            start_pos.x = init_pose[0]
+            start_pos.y = init_pose[1]
+            start_pos.z = init_pose[2]
+                        
+            self.start_pos_pub(start_pos)
             
             self.est_pose_robot_pub.publish(d_gtg)
             
