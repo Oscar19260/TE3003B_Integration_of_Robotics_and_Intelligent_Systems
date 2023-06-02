@@ -1,0 +1,10 @@
+<launch>
+    <include file="$(find ros_deep_learning)/launch/video_source.ros1.launch" />
+    <node name="republish_node" pkg="image_transport" type="republish" args="raw in:=/video_source/raw compressed out:=video_source/raw" />
+    
+    <!-- <node name="config_camera" pkg="aruco_markers" type="yaml_to_camera_info_publisher.py" output="screen" /> -->
+    
+    <include file="$(find aruco_markers)/launch/aruco_detect.launch" />
+    <node name="aruco_tf" pkg="aruco_markers" type="aruco_tf.py" output="screen" />
+
+</launch>
